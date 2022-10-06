@@ -40,7 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # app
     'dashboard.apps.DashboardConfig',
+<<<<<<< HEAD
     # install app
+=======
+    'authentication.apps.AuthenticationConfig',
+    # install app
+    'crispy_forms',
+>>>>>>> 17de5980e8b95cf1b208ab4cc001fe0235d861a8
 ]
 
 MIDDLEWARE = [
@@ -130,3 +136,5 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = 'dashboard-index'
+LOGIN_URL = 'user-login'
