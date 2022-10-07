@@ -1,8 +1,29 @@
-{% extends 'base.html' %} {% block title %}Login Page {% endblock title %}
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}Login Page {% endblock title %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/login.css' %}" />{% endblock css %} 
+{% load crispy_forms_tags %}
 {%block content %}
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %} {{form}}
-  <button type="submit">Login</button>
-</form>
+  <div class="login_box">
+    <h1>
+      Production Efficiency Report
+      <span class="title_small"></br>(PPER)</span>
+    </h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form_container">
+        <div class="form_control">
+          {{ form.username|as_crispy_field}}
+        </div>
+        <div class="form_control">
+          {{ form.password|as_crispy_field}}
+          <a href="#">Forget Password</a>
+        </div>
+        <div class="submit">
+          <button class="sign-in">
+            Login Now<i class="fa fa-sign-in" aria-hidden="true"></i>
+          </button>
+        </div>
+    </form>
+  </div>
 {% endblock%}
