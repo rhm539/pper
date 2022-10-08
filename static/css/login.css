@@ -14,43 +14,43 @@
     font-size: 16px;
 }
 
-.title_small {
+.login_box .title_small {
     font-size: 12px;
 }
 
-.form_container {
+.login_box .form_container {
     text-align: center;
 }
 
-.form_control {
+.login_box .form_control {
     display: flex;
     flex-direction: column;
     margin: 10px;
 }
 
-label {
+.login_box label {
     font-size: 15px;
     padding-right: 15px;
 }
 
-input {
+.login_box input {
     padding: 6px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 15px;
 }
 
-input:focus {
+.login_box input:focus {
     outline-color: blue;
 }
 
-a {
+.login_box a {
     font-size: 12px;
     color: red;
     text-align: center;
     margin-top: 5px;
 }
 
-.submit button {
+.login_box .submit button {
     margin-top: 25px;
 }

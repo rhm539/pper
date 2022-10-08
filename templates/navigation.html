@@ -3,6 +3,7 @@
 <div class="navbar">
     <nav class="container">
         <ul class="menu">
+            {% if user.is_authenticated %}
             <li class="item"><a href="{% url 'web' %}">Home</a></li>
             <li class="item"><a href="#">About</a></li>
             <li class="item has-submenu">
@@ -28,6 +29,12 @@
             <li class="item button secondary"><a href="#">Sign Up</a></li>
             <li class="toggle"><a href="#"><i class="material-symbols-outlined">menu</i></a></li>
             <li class="logo"><a href="#">Creative Mind Agency</a></li>
+            {% else %}
+            <li class="item button"><a href="{% url 'logout' %}">Log Out</a></li>
+            <li class="item button secondary"><a href="#">Sign Up</a></li>
+            <li class="toggle"><a href="#"><i class="material-symbols-outlined">menu</i></a></li>
+            <li class="logo"><a href="#">Creative Mind Agency</a></li>
+            {% endif %}
         </ul>
     </nav>
 </div>
