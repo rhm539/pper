@@ -16,36 +16,6 @@ body {
     margin: 0 auto;
 }
 
-button {
-    padding: 10px 15px;
-    border: none;
-    transition: 0.2s ease-in-out;
-    border-radius: 8px;
-    align-items: center;
-    justify-content: center;
-
-}
-
-button:hover {
-    opacity: 0.8;
-    transition: 0.2s ease-in-out;
-    cursor: pointer;
-}
-
-.sign-out,
-.delete {
-    color: red;
-    display: flex;
-    align-items: center;
-
-}
-
-.sign-in,
-.submit {
-    color: blue;
-    align-items: center;
-}
-
 a {
     text-decoration: none;
 }
