@@ -1,31 +1,55 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/navigation.css' %}">
-<nav>
-    <ul class="menu">
-        <li class="logo"><a href="#">Creative Mind Agency</a></li>
-        <li class="item"><a href="#">Home</a></li>
-        <li class="item"><a href="#">About</a></li>
-        <li class="item has-submenu">
-            <a tabindex="0">Services</a>
-            <ul class="submenu">
-                <li class="subitem"><a href="#">Design</a></li>
-                <li class="subitem"><a href="#">Development</a></li>
-                <li class="subitem"><a href="#">SEO</a></li>
-                <li class="subitem"><a href="#">Copywriting</a></li>
+{% load static %} 
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/2f87bce0c0.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <nav>
+            <ul class="menu">
+                <li class="logo"><a href="#">Creative Mind Agency</a></li>
+                <li class="item"><a href="#">Home</a></li>
+                <li class="item"><a href="#">About</a></li>
+                <li class="item has-submenu">
+                    <a tabindex="0">Services</a>
+                    <ul class="submenu">
+                        <li class="subitem"><a href="#">Design</a></li>
+                        <li class="subitem"><a href="#">Development</a></li>
+                        <li class="subitem"><a href="#">SEO</a></li>
+                        <li class="subitem"><a href="#">Copywriting</a></li>
+                    </ul>
+                </li>
+                <li class="item has-submenu">
+                    <a tabindex="0">Plans</a>
+                    <ul class="submenu">
+                        <li class="subitem"><a href="#">Freelancer</a></li>
+                        <li class="subitem"><a href="#">Startup</a></li>
+                        <li class="subitem"><a href="#">Enterprise</a></li>
+                    </ul>
+                </li>
+                <li class="item"><a href="#">Blog</a></li>
+                <li class="item"><a href="#">Contact</a></li>
+                <li class="item button"><a href="#">Log In</a></li>
+                <li class="item button secondary"><a href="#">Sign Up</a></li>
+                <li class="toggle"><a href="#"><i class="fas fa-bars"></i></a></li>
             </ul>
-        </li>
-        <li class="item has-submenu">
-            <a tabindex="0">Plans</a>
-            <ul class="submenu">
-                <li class="subitem"><a href="#">Freelancer</a></li>
-                <li class="subitem"><a href="#">Startup</a></li>
-                <li class="subitem"><a href="#">Enterprise</a></li>
-            </ul>
-        </li>
-        <li class="item"><a href="#">Blog</a></li>
-        <li class="item"><a href="#">Contact</a></li>
-        <li class="item button"><a href="#">Log In</a></li>
-        <li class="item button secondary"><a href="#">Sign Up</a></li>
-        <li class="toggle"><a href="#"><i class="fas fa-bars"></i></a></li>
-    </ul>
-</nav>
+        </nav>
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <script src="{% static 'js/navigation.js' %}"></script>
+    </body>
+</html>
+
