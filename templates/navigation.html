@@ -5,9 +5,17 @@
         <ul class="menu">
         {% if user.is_authenticated %}
             <li class="item"><a href="{% url 'web' %}">Home</a></li>
-            <li class="item"><a href="#">About</a></li>
             <li class="item has-submenu">
-                <a tabindex="0">Services</a>
+                <a tabindex="0">Setup</a>
+                <ul class="submenu">
+                    <li class="subitem"><a href="#">Buyer Add</a></li>
+                    <li class="subitem"><a href="#">Buyer List</a></li>
+                    <li class="subitem"><a href="#">Style Add</a></li>
+                    <li class="subitem"><a href="#">Style List</a></li>
+                </ul>
+            </li>
+            <li class="item has-submenu">
+                <a tabindex="0">Plans</a>
                 <ul class="submenu">
                     <li class="subitem"><a href="#">Design</a></li>
                     <li class="subitem"><a href="#">Development</a></li>
@@ -16,24 +24,39 @@
                 </ul>
             </li>
             <li class="item has-submenu">
-                <a tabindex="0">Plans</a>
+                <a tabindex="0">Production</a>
                 <ul class="submenu">
                     <li class="subitem"><a href="#">Freelancer</a></li>
                     <li class="subitem"><a href="#">Startup</a></li>
                     <li class="subitem"><a href="#">Enterprise</a></li>
                 </ul>
             </li>
-            <li class="item"><a href="#">Blog</a></li>
+            <li class="item has-submenu">
+                <a tabindex="0">Efficiency</a>
+                <ul class="submenu">
+                    <li class="subitem"><a href="#">Freelancer</a></li>
+                    <li class="subitem"><a href="#">Startup</a></li>
+                    <li class="subitem"><a href="#">Enterprise</a></li>
+                </ul>
+            </li>
+            <li class="item has-submenu">
+                <a tabindex="0">Report</a>
+                <ul class="submenu">
+                    <li class="subitem"><a href="#">Freelancer</a></li>
+                    <li class="subitem"><a href="#">Startup</a></li>
+                    <li class="subitem"><a href="#">Enterprise</a></li>
+                </ul>
+            </li>
             <li class="item"><a href="#">Contact</a></li>
-            <li class="item button"><a href="{% url 'logout' %}">Log Out</a></li>
-            <li class="item button secondary"><a href="#">Sign Up</a></li>
+            <li class="item button"><a href="{% url 'logout' %}">Log Out<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+            <li class="item button secondary"><a href="#">Sign Up<i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
             <li class="toggle"><a href="#"><i class="material-symbols-outlined">menu</i></a></li>
-            <li class="logo"><a href="#">Creative Mind Agency</a></li>
+            <li class="logo"><img src="{% static 'images/Logo.png' %}" alt="logo" /></li>
         {% else %}
-            <li class="item button"><a href="{% url 'login' %}">Log In</a></li>
-            <li class="item button secondary"><a href="#">Sign Up</a></li>
+            <li class="item button"><a href="{% url 'login' %}">Log In<i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+            <li class="item button secondary"><a href="#">Sign Up<i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
             <li class="toggle"><a href="#"><i class="material-symbols-outlined">menu</i></a></li>
-            <li class="logo"><a href="#">Creative Mind Agency</a></li>
+            <li class="logo"><img src="{% static 'images/Logo.png' %}" alt="logo" /></li>
         {% endif %}
         </ul>
     </nav>

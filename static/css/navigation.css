@@ -18,20 +18,20 @@
     list-style-type: none;
 }
 
-.navbar .logo {
-    font-size: 20px;
-    padding: 7.5px 10px 7.5px 0;
+.navbar img {
+    width: 50px;
 }
+
 
 .navbar .item {
     padding: 10px;
 }
 
-/*
+
 .navbar .item.button {
     padding: 9px 5px;
 }
-*/
+
 
 .navbar .item:not(.button) a:hover,
 .navbar .item a:hover::after {
@@ -47,8 +47,10 @@
 }
 
 .navbar .menu li a {
+    display: flex;
     display: block;
     padding: 15px 5px;
+
 }
 
 .navbar .menu li.subitem a {

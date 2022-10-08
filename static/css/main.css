@@ -19,3 +19,20 @@ body {
 a {
     text-decoration: none;
 }
+
+button {
+    padding: 10px 15px;
+    border: none;
+    transition: 0.2s ease-in-out;
+    border-radius: 10px;
+}
+
+button:hover {
+    opacity: 0.8;
+    transition: 0.2s ease-in-out;
+
+}
+
+.fa {
+    padding: 5px;
+}
