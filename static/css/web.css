@@ -1,56 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    line-height: 1.4;
-    font-weight: 300;
-    font-family: "Roboto", sans-serif;
-}
-
-button {
-    padding: 10px 15px;
-    border: none;
-    transition: 0.2s ease-in-out;
-}
-
-button:hover {
-    opacity: 0.8;
-    transition: 0.2s ease-in-out;
-}
-
-/* Navigation */
-
-nav {
-    box-shadow: 5px 5px 5px rgba(1, 1, 1, 0.05);
-    position: sticky;
-    top: 0;
-    margin-bottom: 32px;
-    background: white;
-    padding: 10px;
-    z-index: 50;
-}
-
-.navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.bar_icon {
-    font-size: 32px;
-}
-
 /* Hero Section */
 .hero {
     display: flex;
@@ -58,8 +7,6 @@ nav {
     justify-content: center;
     align-items: center;
 }
-
-
 
 .hero_image {
     border-radius: 50%;
