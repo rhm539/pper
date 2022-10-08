@@ -1,56 +1,31 @@
 {% load static %}
-{% block css %}<link rel="stylesheet" href="{% static 'css/navigation.css' %}" />{% endblock css %}
-    <nav>
-      <div class="navigation container">
-        <div class="logo_container">
-          <img src="{% static 'images/Logo.png' %}" alt="logo" />
-        </div>
-        <div class="menu-area">
-          {% if user.is_authenticated %}
-          <div class="user-menu">
-            <ul>
-              <li><a href="{% url 'home' %}">Home</a></li>
-              <li>
-                Setup<i class="fa fa-caret-down" aria-hidden="true"></i>
-              </li>
-              <li>Plan<i class="fa fa-caret-down" aria-hidden="true"></i></li>
-              <li>Production<i class="fa fa-caret-down" aria-hidden="true"></i></li>
-              <li>Efficiency<i class="fa fa-caret-down" aria-hidden="true"></i></li>
-              <li>Report<i class="fa fa-caret-down" aria-hidden="true"></i></li>
+<link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+<nav>
+    <ul class="menu">
+        <li class="logo"><a href="#">Creative Mind Agency</a></li>
+        <li class="item"><a href="#">Home</a></li>
+        <li class="item"><a href="#">About</a></li>
+        <li class="item has-submenu">
+            <a tabindex="0">Services</a>
+            <ul class="submenu">
+                <li class="subitem"><a href="#">Design</a></li>
+                <li class="subitem"><a href="#">Development</a></li>
+                <li class="subitem"><a href="#">SEO</a></li>
+                <li class="subitem"><a href="#">Copywriting</a></li>
             </ul>
-          </div>
-          <div class="user-name">{{user}}</div>
-        <div>
-            <a href="{% url 'logout' %}">
-              <button class="sign-out">
-                Logout<i class="fa fa-sign-out" aria-hidden="true"></i>
-              </button></a>
-          </div>
-          {% else %}
-          <div class="web-menu">
-            <ul>
-              <li><a href="{% url 'web' %}">Home</a></li>
-              <li>About Us</li>
-              <li>OUR BUYERS</li>
-              <li>Contact us</li>
+        </li>
+        <li class="item has-submenu">
+            <a tabindex="0">Plans</a>
+            <ul class="submenu">
+                <li class="subitem"><a href="#">Freelancer</a></li>
+                <li class="subitem"><a href="#">Startup</a></li>
+                <li class="subitem"><a href="#">Enterprise</a></li>
             </ul>
-          </div>
-          <div>
-            <a href="{% url 'login' %}">
-                <button class="sign-in">
-                  Login<i class="fa fa-sign-in" aria-hidden="true"></i>
-                </button>
-            </a>
-          </div>
-          <div>
-            <a href="{% url 'login' %}">
-                <button class="sign-in">
-                  Sign-Up
-                  <i class="fa fa-user-plus" aria-hidden="true"></i>
-                </button>
-            </a>
-          </div>
-          {% endif %} 
-        </div>
-      </div>
-    </nav>
+        </li>
+        <li class="item"><a href="#">Blog</a></li>
+        <li class="item"><a href="#">Contact</a></li>
+        <li class="item button"><a href="#">Log In</a></li>
+        <li class="item button secondary"><a href="#">Sign Up</a></li>
+        <li class="toggle"><a href="#"><i class="fas fa-bars"></i></a></li>
+    </ul>
+</nav>
