@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}Login Page {% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/addList.css' %}" />
+<div class="container">
+    <div class="add-area">
+        <div class="add_box">
+        </div>    
+    </div>
+    <div class="list-area">
+      <div class="buyerAdd">
+        <button class="open-button" onclick="openForm()">Open Form</button>
+        <div class="form-popup" id="myForm">
+          <form action="/action_page.php" class="form-container">
+            <h1>Login</h1>
+
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <button type="submit" class="btn">Login</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+        <table style="width:100%">
+          <tr>
+            <th style="width:5%">SL</th>
+            <th style="width:45%">Buyer</th>
+            <th style="width:15%">Shortcut</th>
+            <th style="width:20%">Address</th>
+            <th style="width:15%">Action</th>
+          </tr>
+          {% for Buyer in Buyers %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{Buyer.name}}</td>
+            <td>{{Buyer.shortcut}}</td>
+            <td>{{Buyer.address}}</td>
+            <td></td>
+          </tr>
+          {% endfor%}
+        </table>
+    </div>
+</div>
+<script src="{% static 'js/addForm.js' %}"></script>
+{% endblock%}

@@ -1,1 +1,36 @@
-rob
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}Login Page {% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/addList.css' %}" />{% endblock css %} 
+<div class="container">
+    <div class="add-area">
+        <div class="add_box">
+        </div>    
+    </div>
+    <div class="list-area">
+      <table>
+        <table style="width:100%">
+          <tr>
+            <th></th>
+            <th></th>
+            <th class="buyerAdd" colspan="3"><button class="submit">Add Buyer</button></th>
+          </tr>
+          <tr>
+            <th style="width:5%">SL</th>
+            <th style="width:45%">Buyer</th>
+            <th style="width:15%">Shortcut</th>
+            <th style="width:20%">Address</th>
+            <th style="width:15%">Action</th>
+          </tr>
+          <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+          </tr>
+        </table>
+    </div>
+</div>
+{% endblock%}
