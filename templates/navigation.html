@@ -1,5 +1,6 @@
-{% load static %} 
-<link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/navigation.css' %}">{% endblock css %} 
+
 <div class="navbar">
     <nav class="container">
         <ul class="menu">
@@ -48,13 +49,13 @@
                 </ul>
             </li>
             <li class="item"><a href="#">Contact</a></li>
-            <li class="item button"><a href="{% url 'logout' %}">Log Out<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
-            <li class="item button secondary"><a href="#">Sign Up<i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+            <li class="item button btn-red btn-r12 "><a href="{% url 'logout' %}">Log Out<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+            <li class="item button btn-gray btn-r12 secondary"><a href="#">Sign Up<i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
             <li class="toggle"><a href="#"><i class="material-symbols-outlined">menu</i></a></li>
             <li class="logo"><img src="{% static 'images/Logo.png' %}" alt="logo" /></li>
         {% else %}
-            <li class="item button"><a href="{% url 'login' %}">Log In<i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
-            <li class="item button secondary"><a href="#">Sign Up<i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+            <li class="item button btn-green btn-r12"><a href="{% url 'login' %}">Log In<i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+            <li class="item button btn-gray btn-r12 secondary"><a href="#">Sign Up<i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
             <li class="toggle"><a href="#"><i class="material-symbols-outlined">menu</i></a></li>
             <li class="logo"><img src="{% static 'images/Logo.png' %}" alt="logo" /></li>
         {% endif %}

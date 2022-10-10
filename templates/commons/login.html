@@ -15,12 +15,14 @@
         <div class="form_control">
           {{ form.username|as_crispy_field}}
         </div>
-        <div class="form_control">
+        <div class="form_control pass-area">
           {{ form.password|as_crispy_field}}
-          <a href="#">Forget Password</a>
+          <div class="for-pass">
+            <a href="#">Forget Password</a>
+          </div>
         </div>
         <div class="submit">
-          <button class="sign-in">
+          <button>
             Login Now<i class="fa fa-sign-in" aria-hidden="true"></i>
           </button>
         </div>

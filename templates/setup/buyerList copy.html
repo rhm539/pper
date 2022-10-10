@@ -6,38 +6,27 @@
 <link rel="stylesheet" href="{% static 'css/addList.css' %}" />
 <div class="container">
     <div class="add-area">
+      {% if messages %}
+            {% for message in messages %}
+            <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
         <div class="add_box">
+          <div class="buyerAdd">
+            <button class="open-button" onclick="openForm()">Add Buyer</button>
+            <div class="form-popup" id="myForm">
+                <form  action={% url 'buyer-list'%} method="POST" class="form-container">
+                  <h1>Buyer Add Form</h1>
+                  {% csrf_token %}
+                  {{form}}
+                  <button type="submit" class="btn">Login</button>
+                  <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                </form>
+            </div>
+          </div>
         </div>    
     </div>
     <div class="list-area">
-      <div class="buyerAdd">
-        <button class="open-button" onclick="openForm()">Open Form</button>
-        <div class="form-popup" id="myForm">
-          <form action="/action_page.php" class="form-container">
-            <h1>Login</h1>
-
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
-
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-
-            <button type="submit" class="btn">Login</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-          </form>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-      </div>
         <table style="width:100%">
           <tr>
             <th style="width:5%">SL</th>

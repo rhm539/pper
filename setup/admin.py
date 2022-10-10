@@ -5,15 +5,15 @@ from setup.models import *
 
 
 class unitAdmin(admin.ModelAdmin):
-    list_display = ('name', 'shortcut', 'address')
+    list_display = ('pk', 'name', 'shortcut', 'address')
 
 
 class buyerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'shortcut', 'address')
+    list_display = ('pk', 'name', 'shortcut', 'address')
 
 
 class styleAdmin(admin.ModelAdmin):
-    list_display = ('name', 'buyer', 'smv')
+    list_display = ('pk', 'name', 'buyer', 'smv')
     list_filter = ('name', 'buyer', 'smv')
 
 

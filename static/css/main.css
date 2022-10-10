@@ -14,12 +14,14 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 5px;
 }
 
 a {
     text-decoration: none;
 }
 
+/*
 button {
     padding: 10px 15px;
     border: none;
@@ -31,13 +33,103 @@ button:hover {
     opacity: 0.8;
     transition: 0.2s ease-in-out;
 }
-
-.fa {
-    padding: 5px;
+*/
+/*--------CSS Buttons----*/
+.button {
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 1px;
+    cursor: pointer;
+    opacity: 0.9;
+    transition-duration: 0.4s ease-in-out;
 }
 
-.submit {
+.button:hover {
+    opacity: 1;
+    transition-duration: 0.4s ease-in-out;
+}
+
+/* Green */
+.btn-green {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Blue */
+.btn-blue {
+    background-color: #008CBA;
+    color: white;
+}
+
+/* ReD */
+.btn-red {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Black */
+.btn-black {
+    background-color: #e7e7e7;
+    color: black;
+}
+
+/* Gray */
+.btn-gray {
+    background-color: #555555;
+    color: white;
+}
+
+
+.btn-r12 {
+    border-radius: 12px;
+}
+
+/*------------ALL Icon----------------*/
+.fa {
+    padding: 0 5px;
+}
+
+/*------------Message----------------*/
+.success {
+    text-align: center;
+    padding: 5px 0;
     background-color: blue;
     color: white;
+    margin-bottom: 3px;
+}
 
+.warning {
+    text-align: center;
+    padding: 5px 0;
+    background-color: red;
+    color: white;
+    margin-bottom: 3px;
+}
+
+/*----Table--------------------------*/
+.table {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px;
+
+}
+
+.table,
+.table th,
+.table td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    height: 30px;
+}
+
+.table tr:nth-child(even) {
+    background-color: rgba(150, 212, 212, 0.4);
+}
+
+.table th:nth-child(even),
+.table td:nth-child(even) {
+    background-color: rgba(150, 212, 212, 0.4);
 }

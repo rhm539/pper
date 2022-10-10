@@ -12,18 +12,20 @@
     <script src="https://kit.fontawesome.com/7a4b62b0a4.js" crossorigin="anonymous"></script>
     {% block  Bootstrap_v5 %}{% endblock Bootstrap_v5 %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block css %} {% endblock css %}
   </head>
 
   <body>
     <!--Navigation -->
     {% include 'navigation.html'%}
     <!-- <h1>Built-In User Registeration / Authentication App</h1> -->
-    {% block css %} {% endblock css %}
-    {% block content %} {% endblock content %}
-  
+    <div class="container">
+      {% block content %} {% endblock content %}
+    
 
 
-    {% block javascript %} {% endblock javascript%}
+      {% block javascript %} {% endblock javascript%}
+    </div>
   </body>
 
 </html>
