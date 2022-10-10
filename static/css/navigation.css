@@ -21,10 +21,6 @@
     padding: 2px;
 }
 
-
-.navbar .item:not(.button) a:hover,
-.navbar .item a:hover::after {}
-
 /* Mobile menu */
 .navbar .menu {
     display: flex;
