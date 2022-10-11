@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %} 
 {% block title %}Login Page {% endblock title %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/login.css' %}" />{% endblock css %} 
 {% load crispy_forms_tags %}
 {%block content %}
-{% block css %}<link rel="stylesheet" href="{% static 'css/login.css' %}" />{% endblock css %} 
   <div class="login_box">
     <h1>
       Production Efficiency Report
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="submit">
-          <button>
+          <button class="button btn-green btn-r12">
             Login Now<i class="fa fa-sign-in" aria-hidden="true"></i>
           </button>
         </div>

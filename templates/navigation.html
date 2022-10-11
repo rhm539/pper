@@ -1,6 +1,4 @@
 {% load static %}
-{% block css %}<link rel="stylesheet" href="{% static 'css/navigation.css' %}">{% endblock css %} 
-
 <div class="navbar">
     <nav class="container">
         <ul class="menu">
@@ -10,9 +8,7 @@
                 <a tabindex="0">Setup</a>
                 <ul class="submenu">
                     <li class="subitem"><a href="{% url 'buyer-list'%}">Buyer Add</a></li>
-                    <li class="subitem"><a href="#">Buyer List</a></li>
-                    <li class="subitem"><a href="#">Style Add</a></li>
-                    <li class="subitem"><a href="#">Style List</a></li>
+                    <li class="subitem"><a href="{% url 'style-list'%}">Style Add</a></li>
                 </ul>
             </li>
             <li class="item has-submenu">

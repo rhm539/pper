@@ -32,7 +32,8 @@
 .navbar .menu li a {
     display: flex;
     display: block;
-    padding: 10px 5px;
+    padding: 10px 10px;
+    color: black;
 
 }
 
@@ -43,6 +44,7 @@
 
 .navbar .item.button {
     order: 2;
+
 }
 
 .navbar .item {
@@ -86,6 +88,14 @@
     background-color: aliceblue;
     border-radius: 3px;
 }
+
+.navbar .btn-green a,
+.navbar .btn-red a,
+.navbar .btn-gray a {
+    color: white !important;
+}
+
+
 
 /* Tablet menu */
 @media all and (min-width: 700px) {

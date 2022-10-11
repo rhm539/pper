@@ -2,7 +2,7 @@
 {% load static %} 
 {% block title %}Buyer Page{% endblock title %}
 {% load crispy_forms_tags %}
-{% block css %}<link rel="stylesheet" href="{% static 'css/setup/buyerListAdd.css' %}" />{% endblock css %}  
+{% block css %}<link rel="stylesheet" href="{% static 'css/setup/styleListAdd.css' %}" />{% endblock css %}  
 {% block content %}
 <div class="buyer-add-edit">
   <div class="messages">
@@ -14,22 +14,21 @@
   </div>
   <div class="hero_box">
     <div class="add-buyer">
-      <h3><a href="#" class="open-button" onclick="openForm()">Add Buyer</a></h3>
+      <h3><a href="#" class="open-button" onclick="openForm()">Add Style</a></h3>
       <div id="myForm">
           <form  action={% url 'buyer-list'%} method="POST" class="form-container">
             {% csrf_token %}
           <div class="form_container">
             <div class="form_control">
-              <label for="id_name"> Buyer Name </label>
+              <label for="id_name"> Style Name </label>
               {{ form.name|as_crispy_field}}
             </div>
             <div class="form_control">
-              <label for="id_shortcut"> Short Name </label>
-              {{ form.shortcut|as_crispy_field}}
+              {{ form.buyer}}
             </div>
             <div class="form_control">
-              <label for="id_address"> Address </label>
-              {{ form.address|as_crispy_field}}
+              <label for="id_smv"> SMV </label>
+              {{ form.smv}}
             </div>
           </div>
           <div class="button_container">

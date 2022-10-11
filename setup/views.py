@@ -1,7 +1,7 @@
 from email import message
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from setup.forms import BuyerForm
+from setup.forms import *
 from setup.models import buyer, style
 from django.contrib import messages
 
@@ -23,6 +23,7 @@ def buyer_list(request):
             messages.success(request, 'Successful, Buyer Add in PPER System')
             return redirect('buyer-list')
         else:
+            form = BuyerForm()
             messages.warning(
                 request, 'Unsuccessful, Buyer Cannot Add in PPER System')
     # if a GET (or any other method) we'll create a blank form
@@ -61,8 +62,39 @@ def buyer_edit(request, pk):
     context = {
         'Buyers': Buyer,
         'form': form,
+        'pk': pk,
     }
-    return render(request, 'setup/buyerList.html', context)
+    return render(request, 'setup/buyerListEdit.html', context)
+
+
+def style_list(request):
+    Style = style.objects.all().order_by('name')
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = BuyerForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            # print(form)
+            # return HttpResponseRedirect('buyer-list')
+            form.save()
+            messages.success(request, 'Successful, Style Add in PPER System')
+            return redirect('style-list')
+        else:
+            form = StyleForm()
+            messages.warning(
+                request, 'Unsuccessful, Style Cannot Add in PPER System')
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = BuyerForm()
+    context = {
+        'Style': Style,
+        'form': form,
+    }
+    return render(request, 'setup/styleListAdd.html', context)
 
 
 '''
