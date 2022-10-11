@@ -8,6 +8,6 @@ urlpatterns = [
          name='buyer-edit'),  # List and Edit Buyer
     path('style/list', views.style_list,
          name='style-list'),  # List and Add Buyer
-    path('style/edit/<int:pk>/', views.buyer_edit,
+    path('style/edit/<int:pk>/', views.style_edit,
          name='style-edit'),  # List and Edit Buyer
 ]

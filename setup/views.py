@@ -68,11 +68,11 @@ def buyer_edit(request, pk):
 
 
 def style_list(request):
-    Style = style.objects.all().order_by('name')
+    Style = style.objects.all()
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = BuyerForm(request.POST)
+        form = StyleForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -89,12 +89,43 @@ def style_list(request):
                 request, 'Unsuccessful, Style Cannot Add in PPER System')
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = BuyerForm()
+        form = StyleForm()
     context = {
         'Style': Style,
         'form': form,
     }
     return render(request, 'setup/styleListAdd.html', context)
+
+
+def style_edit(request, pk):
+    Style = style.objects.all().order_by('name')
+    StyleEdit = style.objects.get(id=pk)
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = StyleForm(request.POST, instance=StyleEdit)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            # print(form)
+            # return HttpResponseRedirect('buyer-list')
+            form.save()
+            messages.success(request, 'Successful, Style Add in PPER System')
+            return redirect('style-list')
+        else:
+            messages.warning(
+                request, 'Unsuccessful, Buyer Cannot Add in PPER System')
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = StyleForm(instance=StyleEdit)
+    context = {
+        'Style': Style,
+        'form': form,
+        'pk': pk,
+    }
+    return render(request, 'setup/styleListEdit.html', context)
 
 
 '''

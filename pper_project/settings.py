@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # local
     'dashboard.apps.DashboardConfig',
     'setup.apps.SetupConfig',
+    'user.apps.UserConfig',
     # install
     "crispy_forms",
     "crispy_bootstrap5",

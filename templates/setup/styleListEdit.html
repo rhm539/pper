@@ -17,22 +17,22 @@
   </div>
   <div class="hero_box">
     <div class="add-buyer">
-      <h3><a href="#" class="open-button" onclick="openForm()">Update Buyer</a></h3>
+      <h3><a href="#" class="open-button" onclick="openForm()">Update Style</a></h3>
       <div id="myForm">
-          <form  action={% url 'buyer-list'%} method="POST" class="form-container">
+          <form method="POST" class="form-container">
             {% csrf_token %}
           <div class="form_container">
             <div class="form_control">
-              <label for="id_name"> Buyer Name </label>
+              <label for="id_name"> Style Name </label>
               {{ form.name|as_crispy_field}}
             </div>
             <div class="form_control">
-              <label for="id_shortcut"> Short Name </label>
-              {{ form.shortcut|as_crispy_field}}
+              <label for="id_buyer">Buyer Name</label>
+              {{ form.buyer}}
             </div>
             <div class="form_control">
-              <label for="id_address"> Address </label>
-              {{ form.address|as_crispy_field}}
+              <label for="id_smv"> SMV </label>
+              {{ form.smv}}
             </div>
           </div>
           <div class="button_container">
@@ -42,25 +42,28 @@
       </div>
     </div>
     <div class="total-buyer">
-      <h3>Total Buyer</h3>
+      <h3>New Style</h3>
+    </div>
+    <div class="total-buyer">
+      <h3>Total Style</h3>
     </div>
   </div>
   <div class="list-area">
     <table class="table"style="width:100%">
         <tr>
             <th style="width:5%">SL</th>
-            <th style="width:45%">Buyer</th>
-            <th style="width:15%">Shortcut</th>
-            <th style="width:20%">Address</th>
+            <th style="width:45%">Style</th>
+            <th style="width:15%">Buyer</th>
+            <th style="width:20%">SMV</th>
             <th style="width:15%">Action</th>
           </tr>
-          {% for Buyer in Buyers %}
+          {% for Styles in Style %}
           <tr>
             <td>{{forloop.counter}}</td>
-            <td>{{Buyer.name}}</td>
-            <td>{{Buyer.shortcut}}</td>
-            <td>{{Buyer.address}}</td>
-            <td><a href={% url 'buyer-edit' Buyer.pk%} class="button btn-red btn-r12 by-edit">Edit</a></td>
+            <td>{{Styles.name}}</td>
+            <td>{{Styles.buyer}}</td>
+            <td>{{Styles.smv}}</td>
+            <td><a href="{% url 'style-edit' Styles.pk %}" class="button btn-green btn-r12 by-edit">Edit</a></td>
           </tr>
           {% endfor%}
         </table>
