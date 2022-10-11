@@ -43,3 +43,20 @@ class style(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class floor(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    unit = models.ForeignKey(unit, models.CASCADE, null=True)
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class line(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    floor = models.ForeignKey(floor, models.CASCADE, null=True)
+    unit = models.ForeignKey(unit, models.CASCADE, null=True)
+
+    def __str__(self):
+        return f'{self.name}'
