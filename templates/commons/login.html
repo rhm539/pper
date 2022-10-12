@@ -3,7 +3,8 @@
 {% block title %}Login Page {% endblock title %}
 {% block css %}<link rel="stylesheet" href="{% static 'css/login.css' %}" />{% endblock css %} 
 {% load crispy_forms_tags %}
-{%block content %}
+{% block content %}
+<div class="container">
   <div class="login_box">
     <h1>
       Production Efficiency Report
@@ -28,4 +29,6 @@
         </div>
     </form>
   </div>
-{% endblock%}
+</div>
+{% endblock %}
+

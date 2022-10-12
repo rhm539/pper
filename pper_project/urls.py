@@ -19,10 +19,15 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
+#from dashboard.views import index
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('dashboard/', include('dashboard.urls')),
+    #path('home/', index)
+    #path('dashboard/', views.index, name='dashboard-index'),
+    #path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
     path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
     path('', TemplateView.as_view(template_name='web.html'), name='web'),
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True,
@@ -38,5 +43,5 @@ urlpatterns = [
         template_name='commons/password-reset/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='commons/password-reset/password_reset_complete.html'), name='password_reset_complete'),
-    path('setup/', include('setup.urls'))
+    path('setup/', include('setup.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

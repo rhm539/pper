@@ -1,9 +1,9 @@
 {% load static %}
 <div class="navbar">
-    <nav class="container">
+    <nav>
         <ul class="menu">
         {% if user.is_authenticated %}
-            <li class="item"><a href="{% url 'web' %}">Home</a></li>
+            <li class="item"><a href="{% url 'home' %}">Home</a></li>
             <li class="item has-submenu">
                 <a tabindex="0">Setup</a>
                 <ul class="submenu">
@@ -11,39 +11,11 @@
                     <li class="subitem"><a href="{% url 'style-list'%}">Style Add</a></li>
                 </ul>
             </li>
-            <li class="item has-submenu">
-                <a tabindex="0">Plans</a>
-                <ul class="submenu">
-                    <li class="subitem"><a href="#">Design</a></li>
-                    <li class="subitem"><a href="#">Development</a></li>
-                    <li class="subitem"><a href="#">SEO</a></li>
-                    <li class="subitem"><a href="#">Copywriting</a></li>
-                </ul>
-            </li>
-            <li class="item has-submenu">
-                <a tabindex="0">Production</a>
-                <ul class="submenu">
-                    <li class="subitem"><a href="#">Freelancer</a></li>
-                    <li class="subitem"><a href="#">Startup</a></li>
-                    <li class="subitem"><a href="#">Enterprise</a></li>
-                </ul>
-            </li>
-            <li class="item has-submenu">
-                <a tabindex="0">Efficiency</a>
-                <ul class="submenu">
-                    <li class="subitem"><a href="#">Freelancer</a></li>
-                    <li class="subitem"><a href="#">Startup</a></li>
-                    <li class="subitem"><a href="#">Enterprise</a></li>
-                </ul>
-            </li>
-            <li class="item has-submenu">
-                <a tabindex="0">Report</a>
-                <ul class="submenu">
-                    <li class="subitem"><a href="#">Freelancer</a></li>
-                    <li class="subitem"><a href="#">Startup</a></li>
-                    <li class="subitem"><a href="#">Enterprise</a></li>
-                </ul>
-            </li>
+            {% if request.user.profile.unit.shortcut == 'BRL' %}
+            {% include 'brl.html'%}
+            {% elif request.user.profile.unit.shortcut == 'FSL'%}
+            {% include 'fsl.html'%}
+            {% endif %}
             <li class="item"><a href="#">Contact</a></li>
             <li class="item button btn-red btn-r12 "><a href="{% url 'logout' %}">Log Out<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
             <li class="item button btn-gray btn-r12 secondary"><a href="#">Sign Up<i class="fa fa-user-plus" aria-hidden="true"></i></a></li>

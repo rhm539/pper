@@ -1,0 +1,37 @@
+/* Footer Section */
+
+footer .link_lists h3 {
+    margin-bottom: 10px;
+    color: gray;
+}
+
+footer .link_lists ul {
+    list-style: none;
+}
+
+footer .link_lists ul li {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+footer .news_letter h3 {
+    margin-bottom: 10px;
+    color: gray;
+}
+
+footer .news_letter input {
+    padding: 5px 40px;
+    margin-bottom: 10px;
+}
+
+footer .footer_container {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer .icon_container {
+    display: flex;
+    gap: 15px;
+    font-size: 32px;
+}

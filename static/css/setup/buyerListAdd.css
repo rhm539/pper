@@ -1,58 +1,43 @@
-.buyer-add-edit {
-    margin-top: 20px;
-}
-
 .buyer-add-edit #myForm {
     display: none;
 }
 
-.buyer-add-edit .hero_box {
+.add-buyer {
+    margin: 15px 10px;
+    float: left;
+    width: 40%;
+    overflow: hidden;
+}
+
+.card-area {
+    padding: 15px 0px;
+    float: right;
+    width: 40%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
-.buyer-add-edit .form_control {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
-    gap: 20px;
-    margin-top: 10px;
-}
+@media all and (max-width: 1159px) {
+    .form_container-grid {
+        display: block;
+        gap: 0;
+        text-align: center;
+        margin-top: 0px;
+    }
 
-.buyer-add-edit .button_container {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-}
+    label {
+        margin-top: 10px;
+    }
 
-.buyer-add-edit .button_container {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-}
-
-.buyer-add-edit .button {
-    font-size: 14px;
-    font-weight: 200;
-    padding: 8px 10px;
-}
-
-.buyer-add-edit .button {
-    font-size: 14px;
-    font-weight: 200;
-    padding: 8px 10px;
-}
-
-.buyer-add-edit .by-edit {
-    padding: 6px 8px;
-    margin: 1px 0;
 
 }
 
-/*
-label {
-    font-size: 15px;
-    margin-bottom: 5px;
+@media all and (max-width: 992px) {
+    .card-area {
+        display: block;
+    }
+
+    .card-area .card:last-child {
+        margin-top: 10px;
+    }
 }

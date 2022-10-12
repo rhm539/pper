@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 {% block css %}<link rel="stylesheet" href="{% static 'css/setup/buyerListAdd.css' %}" />{% endblock css %}  
 {% block content %}
+
 <div class="buyer-add-edit">
   <div class="messages">
     {% if messages %}
@@ -13,12 +14,12 @@
     {% endif %}
   </div>
   <div class="hero_box">
-    <div class="add-buyer">
-      <h3><a href="#" class="open-button" onclick="openForm()">Add Buyer</a></h3>
+    <div class="add-buyer form_box">
+      <h3 class="form-title"><a href="#" class="open-button" onclick="openForm()">Add Buyer</a></h3>
       <div id="myForm">
-          <form method="POST" class="form-container">
+          <form method="POST">
             {% csrf_token %}
-          <div class="form_container">
+          <div class="form_container-grid">
             <div class="form_control">
               <label for="id_name"> Buyer Name </label>
               {{ form.name|as_crispy_field}}
@@ -38,11 +39,19 @@
         </form>
       </div>
     </div>
-    <div class="total-buyer">
-      <h3>New Buyer</h3>
-    </div>
-    <div class="total-buyer">
-      <h3>Total Buyer</h3>
+    <div class="card-area">
+      <div class="card">
+        <div class="card-container">
+          <h4 class="card-title"><b>Jane Doe</b></h4> 
+          <p>Interior Designer</p> 
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-container">
+          <h4 class="card-title"><b>Jane Doe</b></h4> 
+          <p>Interior Designer</p> 
+        </div>
+      </div>
     </div>
   </div>
   <div class="list-area">
