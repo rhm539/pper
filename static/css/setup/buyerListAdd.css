@@ -15,7 +15,11 @@
     width: 40%;
     display: flex;
     justify-content: space-evenly;
+    gap: 10px;
 }
+
+/* Media D*/
+
 
 @media all and (max-width: 1159px) {
     .form_container-grid {
@@ -35,6 +39,10 @@
 @media all and (max-width: 992px) {
     .card-area {
         display: block;
+    }
+
+    .card {
+        width: 80%;
     }
 
     .card-area .card:last-child {

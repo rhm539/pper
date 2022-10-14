@@ -34,15 +34,13 @@
 }
 
 .login_box input {
+
     padding: 6px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 15px;
 }
 
-.login_box input:focus {
-    outline-color: blue;
-}
 
 .login_box .pass-area {
     position: relative;

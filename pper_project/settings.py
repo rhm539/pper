@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'setup.apps.SetupConfig',
     'user.apps.UserConfig',
+    'plan.apps.PlanConfig',
+    'production.apps.ProductionConfig',
+    'efficiency.apps.EfficiencyConfig',
     # install
     "crispy_forms",
     "crispy_bootstrap5",

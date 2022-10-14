@@ -1,6 +1,28 @@
-{% extends 'base.html' %} 
+{% extends 'partials/base.html' %} 
 {% load static %} 
-{% block title %}Home Page{% endblock title %} 
+{% block title %}Dashboard{% endblock title %} 
+{% load crispy_forms_tags %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/dashboard/index.css' %}" />{% endblock css %}  
 {% block content %}
-rob
+<div class="dashboard-index">
+  <div class="grid-container">
+      {% for line in line %}
+      <div class="card">
+        <div class="card-container">
+          <h4 class="card-title"><b>{{line.name}}</b></h4>
+          <div class="card-item">
+            <div class="card-description"><h5>Plan</h5>
+              <p><a href="{% url 'plan-Entry' line.id %}" class="button btn-green btn-r12">Create</a></p>
+            </div> 
+            <div class="card-description"><h5>Production</h5>
+              <p>720</p>
+            </div> 
+            <div class="card-description"><h5>Efficiency</h5>
+              <p>53%</p></div> 
+          </div>  
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
 {% endblock content %}

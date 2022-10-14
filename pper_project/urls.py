@@ -28,8 +28,8 @@ urlpatterns = [
     #path('home/', index)
     #path('dashboard/', views.index, name='dashboard-index'),
     #path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('', TemplateView.as_view(template_name='web.html'), name='web'),
+    path('home/', TemplateView.as_view(template_name='partials/home.html'), name='home'),
+    path('', TemplateView.as_view(template_name='partials/web.html'), name='web'),
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True,
          template_name='commons/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='web'), name='logout'),
@@ -44,4 +44,5 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='commons/password-reset/password_reset_complete.html'), name='password_reset_complete'),
     path('setup/', include('setup.urls')),
+    path('plan/', include('plan.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

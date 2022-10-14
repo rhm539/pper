@@ -1,0 +1,44 @@
+.grid-container {
+    align-content: center;
+    margin-top: 20px;
+}
+
+.card-description {
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+
+}
+
+
+
+.dashboard-index .button {
+    font-size: 14px;
+    margin: 0;
+}
+
+
+
+
+
+
+
+/*-----------Media Queries-------------*/
+
+@media all and (max-width: 992px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 15px;
+    }
+}
+
+@media all and (max-width: 769px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto;
+        gap: 15px;
+    }
+}

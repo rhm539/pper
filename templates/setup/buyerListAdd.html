@@ -1,11 +1,11 @@
-{% extends 'base.html' %} 
+{% extends 'partials/base.html' %} 
 {% load static %} 
 {% block title %}Buyer Page{% endblock title %}
 {% load crispy_forms_tags %}
 {% block css %}<link rel="stylesheet" href="{% static 'css/setup/buyerListAdd.css' %}" />{% endblock css %}  
 {% block content %}
 
-<div class="buyer-add-edit">
+<div class="buyer-add-edit block-content">
   <div class="messages">
     {% if messages %}
     {% for message in messages %}
@@ -42,14 +42,14 @@
     <div class="card-area">
       <div class="card">
         <div class="card-container">
-          <h4 class="card-title"><b>Jane Doe</b></h4> 
-          <p>Interior Designer</p> 
+          <h4 class="card-title"><b>New Buyer</b></h4> 
+          <p class="card-description">{{newBuyer}}</p> 
         </div>
       </div>
       <div class="card">
         <div class="card-container">
-          <h4 class="card-title"><b>Jane Doe</b></h4> 
-          <p>Interior Designer</p> 
+          <h4 class="card-title"><b>Total Buyer</b></h4> 
+          <p class="card-description">{{totalBuyer}}</p> 
         </div>
       </div>
     </div>

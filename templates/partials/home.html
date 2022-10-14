@@ -1,0 +1,8 @@
+{% extends 'partials/base.html' %} 
+{% load static %} 
+{% block title %}Home Page{% endblock title %} 
+{% block content %}
+<meta http-equiv="refresh" content="0; URL={% url 'dashboard-index' user.profile.unit.id %}" />
+{% endblock content %}
+
+

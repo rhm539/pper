@@ -12,9 +12,9 @@
                 </ul>
             </li>
             {% if request.user.profile.unit.shortcut == 'BRL' %}
-            {% include 'brl.html'%}
+            {% include 'partials/brl.html'%}
             {% elif request.user.profile.unit.shortcut == 'FSL'%}
-            {% include 'fsl.html'%}
+            {% include 'partials/fsl.html'%}
             {% endif %}
             <li class="item"><a href="#">Contact</a></li>
             <li class="item button btn-red btn-r12 "><a href="{% url 'logout' %}">Log Out<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>

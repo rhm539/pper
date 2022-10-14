@@ -5,9 +5,10 @@ from setup.models import line
 # Create your views here.
 
 
-def index(request):
-    Line = line.objects.all()
+def index(request, unit):
+    unitline = line.objects.all().filter(unit=unit)
     context = {
-        'Line': Line,
+        'line': unitline,
+        'unit': unit,
     }
     return render(request, 'dashboard/index.html', context)

@@ -1,7 +1,5 @@
 from django.db import models
-
 from django.contrib.auth.models import User
-
 from setup.models import *
 
 # Create your models here.
@@ -24,3 +22,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.loginuser.username}-Profile'
+
+    class Meta:
+        db_table = "Profile"

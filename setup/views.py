@@ -1,13 +1,64 @@
-from email import message
+import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from setup.forms import *
 from setup.models import buyer, style
 from django.contrib import messages
+from datetime import date, timedelta
+from django.db.models import Q
+
+
+def dateFind():
+    toDay = date.today()
+    last7Day = toDay - timedelta(days=45)
+    date7Range = Q(created_at__range=[last7Day, toDay])
+    return date7Range
+
+
+def buyerStatus():
+    date7Range = dateFind()
+    Buyer = buyer.objects.all().order_by('name')
+    totalBuyer = Buyer.count()
+    newBuyer = Buyer.filter(date7Range).count()
+    return Buyer, newBuyer, totalBuyer
+
+
+def styleStatus():
+    date7Range = dateFind()
+    Style = style.objects.all().order_by('-created_at')
+    totalStyle = Style.count()
+    newStyle = Style.filter(date7Range).count()
+    return Style, newStyle, totalStyle
+
+
+'''
+def date_default():
+    enddate = date.today()
+    startdate = enddate - timedelta(days=45)
+    dateQ = Q(date__range=[startdate, enddate])
+    return dateQ
+
+
+def date_enddate(enddate):
+    if not enddate:
+        enddate = date.today()
+    else:
+        enddate = datetime.strptime(enddate, "%m/%d/%Y").strftime('%Y-%m-%d')
+    return enddate
+
+
+def date_startdate(startdate):
+    if not startdate:
+        startdate = '2021-06-01'
+    else:
+        startdate = datetime.strptime(
+            startdate, "%m/%d/%Y").strftime('%Y-%m-%d')
+    return startdate
+'''
 
 
 def buyer_list(request):
-    Buyer = buyer.objects.all().order_by('name')
+    Buyer, newBuyer, totalBuyer = buyerStatus()
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -32,12 +83,14 @@ def buyer_list(request):
     context = {
         'Buyers': Buyer,
         'form': form,
+        'totalBuyer': totalBuyer,
+        'newBuyer': newBuyer,
     }
     return render(request, 'setup/buyerListAdd.html', context)
 
 
 def buyer_edit(request, pk):
-    Buyer = buyer.objects.all().order_by('name')
+    Buyer, newBuyer, totalBuyer = buyerStatus()
     BuyerEdit = buyer.objects.get(id=pk)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -61,6 +114,8 @@ def buyer_edit(request, pk):
         form = BuyerForm(instance=BuyerEdit)
     context = {
         'Buyers': Buyer,
+        'totalBuyer': totalBuyer,
+        'newBuyer': newBuyer,
         'form': form,
         'pk': pk,
     }
@@ -68,7 +123,7 @@ def buyer_edit(request, pk):
 
 
 def style_list(request):
-    Style = style.objects.all()
+    Style, newStyle, totalStyle = styleStatus()
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -93,12 +148,14 @@ def style_list(request):
     context = {
         'Style': Style,
         'form': form,
+        'newStyle': newStyle,
+        'totalStyle': totalStyle,
     }
     return render(request, 'setup/styleListAdd.html', context)
 
 
 def style_edit(request, pk):
-    Style = style.objects.all().order_by('name')
+    Style, newStyle, totalStyle = styleStatus()
     StyleEdit = style.objects.get(id=pk)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -124,6 +181,8 @@ def style_edit(request, pk):
         'Style': Style,
         'form': form,
         'pk': pk,
+        'newStyle': newStyle,
+        'totalStyle': totalStyle,
     }
     return render(request, 'setup/styleListEdit.html', context)
 
