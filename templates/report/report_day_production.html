@@ -1,0 +1,81 @@
+{% extends 'partials/base.html' %} 
+{% load static %} 
+{% block title %}Line Layout{% endblock title %} 
+{% load crispy_forms_tags %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/report/report_day_production.css' %}" />{% endblock css %}  
+{% block content %}
+<div class="line-Plan-Show block-content">
+    <h3 class="page-heading">Daily Production Report | {{mydate}}</h3>
+    {% include 'partials/extra_navbar_report.html'%}
+    <div class="production-area"> 
+        <table class="table">
+            <tr>
+               <th>Line</th>
+               <th>Buyer</th>
+               <th>Style</th>
+               <th>SMV</th>
+               <th>MO</th>
+               <th>HP</th>
+               <th>MP</th>
+               <th>Run Day</th>
+               <th>DOT Hour</th>
+               <th>Work Hour</th>
+               <th>day Target</th>
+               <th>Hour Target</th>
+               <th>Day Achiev.</th>
+               <th>Target Effi</th>
+               <th>achiev. Effi</th>
+               <th>VARI</th>
+               <th>Line WIP</th>
+               <th>9 AM</th>
+               <th>10 AM</th>
+               <th>11 AM</th>
+               <th>12 PM</th>
+               <th>01 PM</th>
+               <th>03 PM</th>
+               <th>04 PM</th>
+               <th>05 PM</th>
+               <th>06 PM</th>
+               <th>07 PM</th>
+               <th>08 PM</th>
+               <th>09 PM</th>
+               <th>10 PM</th>
+            </tr>
+            {% for productions in production %}
+            <tr>
+                <td>{{productions.plan.line}}</td>
+                <td>{{productions.plan.buyer}}</td>
+                <td>{{productions.plan.style}}</td>
+                <td>{{productions.plan.style.smv}}</td>
+                <td>{{productions.operator}}</td>
+                <td>{{productions.helper}}</td>
+                <td>{{productions.manpower}}</td>
+                <td>{{productions.runDay}}</td>
+                <td>{{productions.dotHour}}</td>
+                <td>{{productions.workHour}}</td>
+                <td>{{productions.dayTerget}}</td>
+                <td>{{productions.hourTerget}}</td>
+                <td>{{productions.dayAchievement}}</td>
+                <td>{{productions.targetEfficiency}}</td>
+                <td>{{productions.achievementEfficiency}}</td>
+                <td>{{productions.vari}}</td>
+                <td>{{productions.LineWIP}}</td>
+                <td>{{productions.H_8_9}}</td>
+                <td>{{productions.H_9_10}}</td>
+                <td>{{productions.H_10_11}}</td>
+                <td>{{productions.H_11_12}}</td>
+                <td>{{productions.H_12_13}}</td>
+                <td>{{productions.H_14_15}}</td>
+                <td>{{productions.H_15_16}}</td>
+                <td>{{productions.H_16_17}}</td>
+                <td>{{productions.H_17_18}}</td>
+                <td>{{productions.H_18_19}}</td>
+                <td>{{productions.H_19_20}}</td>
+                <td>{{productions.H_20_21}}</td>
+                <td>{{productions.H_21_22}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock content %}

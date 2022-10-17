@@ -121,7 +121,7 @@
         const name = removePopupIndex(win.name);
         const elem = document.getElementById(name);
         if (elem) {
-            const elemName = elem.nodeName.toUpperCase();
+            const elemName = elem.nodeName.tocapitalize();
             if (elemName === 'SELECT') {
                 elem.options[elem.options.length] = new Option(newRepr, newId, true, true);
                 updateRelatedSelectsOptions(elem, win, null, newRepr, newId);

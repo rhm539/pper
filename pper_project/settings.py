@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'plan.apps.PlanConfig',
     'production.apps.ProductionConfig',
     'efficiency.apps.EfficiencyConfig',
+    'report.apps.ReportConfig',
     # install
     "crispy_forms",
     "crispy_bootstrap5",

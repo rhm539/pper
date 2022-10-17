@@ -5,6 +5,11 @@ from setup.models import *
 from django.contrib.auth.models import User
 # Create your models here.
 
+datastatus = (
+    ('Y', 'YES'),
+    ('N', 'NO'),
+)
+
 
 def increment_booking_number():
     last_booking = plan.objects.all().order_by('planID').last()
@@ -33,7 +38,8 @@ class plan(models.Model):
     linePlanQty = models.PositiveSmallIntegerField(default=0)
     estimateWorkDay = models.PositiveSmallIntegerField(default=0)
     #
-    dataLock = models.BooleanField(default=False)
+    DataLock = models.CharField(
+        max_length=2, default='N', choices=datastatus, null=True)
     staff = models.ForeignKey(User, models.CASCADE, null=True)
     created_at = models.DateField(default=timezone.now)
     modified = models.DateField(auto_now=True)

@@ -1,0 +1,9 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/partials/extra_navbar.css' %}">
+<div class="extra-navbar">
+    <div class="page-bar">
+            <div><a class="button btn-gray btn-last" href="{% url goToPage lastDay %}">Last</a></div>
+            <div><a class="button btn-gray" href="{% url goToPage curentDay %}">Today</a></div>
+            <div><a class="button btn-gray btn-next" href="{% url goToPage nextDay %}">Next</a></div>
+    </div>
+</div>

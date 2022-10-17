@@ -1,20 +1,50 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
+from multiprocessing import context
 from django.shortcuts import render
 from django.contrib import messages
 from plan.forms import PlanForm
 from django.shortcuts import render, redirect
+from plan.models import plan
 from production.models import production
+
 
 from setup.models import buyer, style, line
 # Create your views here.
 
-# AJAX
+#
+
+
+class DateConverter:
+    regex = '\d{4}-\d{1,2}-\d{1,2}'
+    format = '%Y-%m-%d'
+
+    def to_python(self, value):
+        return datetime.strptime(value, self.format).date()
+
+    def to_url(self, value):
+        return value.strftime(self.format)
+
+
+def unitKnow(request):
+    unitKnow = request.user.profile.unit
+    return unitKnow
+
+
+def findOutDate(anyDay):
+    curentDay = curentDay = date.today()
+    nextDay = anyDay + timedelta(days=1)
+    lastDay = anyDay - timedelta(days=1)
+    return lastDay, curentDay, nextDay
+
+# percentage To Amount 3% 103
 
 
 def percentageToAmount(amount, percentage):
     amountValue = round(((amount*percentage)/100)+amount)
     # print(amountValue)
     return amountValue
+
+# date check of plan from
 
 
 def planDate(deleveryDate, inputDate, sewingEndDate):
@@ -39,12 +69,15 @@ def planDate(deleveryDate, inputDate, sewingEndDate):
         datePass = False
     return datePass
 
+# finout amoun of day
+
 
 def planBook(inputDate, sewingEndDate):
-
     planForDay = sewingEndDate - inputDate
     planForDay = (planForDay.days)+1
     return planForDay
+
+# depandency drop down menu
 
 
 def load_style(request):
@@ -87,7 +120,7 @@ def planEntry(request, pk):
                     sewingDate += timedelta(days=1)
                 messages.success(
                     request, 'Successful, Plan Add in PPER System')
-                return redirect('buyer-list')
+                return redirect('plan-Entry-show', planData.pk)
             else:
                 messages.warning(
                     request, 'Unsuccessful, Order Quy. Cannot Zero and check Date')
@@ -102,3 +135,117 @@ def planEntry(request, pk):
         'pk': pk,
     }
     return render(request, 'plan/planEntry.html', context)
+
+
+def planEnt_show(request, pk):
+    planSummary = plan.objects.get(pk=pk)
+    planDetail = production.objects.filter(plan=pk)
+    context = {
+        'planSummary': planSummary,
+        'planDetail': planDetail,
+
+    }
+    return render(request, 'plan/planEntryShow.html', context)
+
+
+def linePlan_show(request, pk):
+    planSummary = plan.objects.all().filter(line=pk).order_by('inputDate')
+    context = {
+        'planSummary': planSummary,
+        # 'planDetail': planDetail,
+    }
+    return render(request, 'plan/linePlanShow.html', context)
+
+
+def forcast_table(request):
+    pk = request.user.profile.unit
+    planSummary = plan.objects.all().filter(unit=pk).order_by('inputDate')
+    context = {
+        'planSummary': planSummary,
+        # 'planDetail': planDetail,
+    }
+    return render(request, 'plan/linePlanShow.html', context)
+
+
+'''
+def Plan_layout(request):
+
+    context = {
+
+    }
+    return render(request, 'plan/plan_layout.html', context)
+'''
+
+
+def Plan_layout_day(unit, dateData):
+    productionData = production.objects.filter(
+        sewingDate=dateData, unit=unit)
+    return productionData
+
+
+def Plan_layout_nav(request, mydate):
+    unit = unitKnow(request)
+    lastDay, curentDay, nextDay = findOutDate(mydate)
+    productionData = Plan_layout_day(unit, mydate)
+    goToPage = 'Plan-Layout-nav'
+    context = {
+        'production': productionData,
+        'lastDay': lastDay,
+        'curentDay': curentDay,
+        'nextDay': nextDay,
+        'goToPage': goToPage,
+        'mydate': mydate,
+    }
+    return render(request, 'plan/plan_layout.html', context)
+
+
+def Plan_layout(request):
+    unit = unitKnow(request)
+    mydate = date.today()
+    lastDay, curentDay, nextDay = findOutDate(mydate)
+    goToPage = 'Plan-Layout-nav'
+    productionData = Plan_layout_day(unit, mydate)
+    context = {
+        'production': productionData,
+        'lastDay': lastDay,
+        'curentDay': curentDay,
+        'nextDay': nextDay,
+        'goToPage': goToPage,
+        'mydate': mydate,
+    }
+    return render(request, 'plan/plan_layout.html', context)
+
+
+def plan_line_lock(request, pk):
+    productionData = production.objects.get(pk=pk)
+    mydate = productionData.sewingDate
+    if productionData.dataLock == 'Y':
+        productionData.dataLock = 'N'
+        # productionData.save()
+        # return redirect('plan-Entry-show', productionData.plan)
+    else:
+        productionData.dataLock = 'Y'
+    productionData.save()
+    return redirect('Plan-Layout-nav', mydate)
+
+
+def plan_line_move(request, pk):
+    productionData = production.objects.get(pk=pk)
+    weekend = productionData.unit.holiday
+    mydate = productionData.sewingDate
+    planData = plan.objects.get(pk=productionData.plan.id)
+    anyDay = planData.sewingEndDate
+    lastDay, curentDay, nextDay = findOutDate(anyDay)
+    dayName = nextDay.weekday()
+    if int(weekend) != int(dayName):
+        productionData.sewingDate = nextDay
+        planData.sewingEndDate = nextDay
+        planData.save()
+        productionData.save()
+    else:
+        lastDay, curentDay, nextDay = findOutDate(nextDay)
+        productionData.sewingDate = nextDay
+        planData.sewingEndDate = nextDay
+        planData.save()
+        productionData.save()
+    return redirect('Plan-Layout-nav', mydate)

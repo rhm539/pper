@@ -3720,8 +3720,8 @@ S2.define('select2/data/tags',[
           }, true)
         );
 
-        var optionText = (option.text || '').toUpperCase();
-        var paramsTerm = (params.term || '').toUpperCase();
+        var optionText = (option.text || '').tocapitalize();
+        var paramsTerm = (params.term || '').tocapitalize();
 
         var checkText = optionText === paramsTerm;
 
@@ -5059,8 +5059,8 @@ S2.define('select2/defaults',[
         return matcher(params, match);
       }
 
-      var original = stripDiacritics(data.text).toUpperCase();
-      var term = stripDiacritics(params.term).toUpperCase();
+      var original = stripDiacritics(data.text).tocapitalize();
+      var term = stripDiacritics(params.term).tocapitalize();
 
       // Check if the text contains the term
       if (original.indexOf(term) > -1) {
@@ -5294,8 +5294,8 @@ S2.define('select2/options',[
 
     var dataset = {};
 
-    function upperCaseLetter(_, letter) {
-      return letter.toUpperCase();
+    function capitalizeLetter(_, letter) {
+      return letter.tocapitalize();
     }
 
     // Pre-load all of the attributes which are prefixed with `data-`
@@ -5312,7 +5312,7 @@ S2.define('select2/options',[
         var dataValue = Utils.GetData($e[0], dataName);
 
         // camelCase the attribute name to match the spec
-        var camelDataName = dataName.replace(/-([a-z])/g, upperCaseLetter);
+        var camelDataName = dataName.replace(/-([a-z])/g, capitalizeLetter);
 
         // Store the data attribute contents into the dataset since
         dataset[camelDataName] = dataValue;

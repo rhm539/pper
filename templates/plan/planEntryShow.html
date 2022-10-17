@@ -1,0 +1,118 @@
+{% extends 'partials/base.html' %} 
+{% load static %} 
+{% block title %}Plan Entry Show{% endblock title %} 
+{% load crispy_forms_tags %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/plan/planEntryShow.css' %}" />{% endblock css %}  
+{% block content %}
+<div class="plan-Entry-show block-content">
+    <div class="messages">
+        {% if messages %}
+        {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="planSummary-area"> 
+        <h3 class="page-heading">Line Plan Summary | {{planSummary.line.name}}</h3>
+        <div class="planSummary form_container-grid"> 
+            <div class="plan-item">
+                <div class="plan-item-label">ID</div>
+                <div class="plan-item-value">{{planSummary.planID}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">Unit</div>
+                <div class="plan-item-value">{{planSummary.unit}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">buyer</div>
+                <div class="plan-item-value">{{planSummary.buyer}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">style</div>
+                <div class="plan-item-value">{{planSummary.style}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">line</div>
+                <div class="plan-item-value">{{planSummary.line}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">deleveryDate</div>
+                <div class="plan-item-value">{{planSummary.deleveryDate}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">inputDate</div>
+                <div class="plan-item-value">{{planSummary.inputDate}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">sewingEndDate</div>
+                <div class="plan-item-value">{{planSummary.sewingEndDate}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">orderQty</div>
+                <div class="plan-item-value">{{planSummary.orderQty}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">planQtyExtra</div>
+                <div class="plan-item-value">{{planSummary.planQtyExtra}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">linePlanQty</div>
+                <div class="plan-item-value">{{planSummary.linePlanQty}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">estimateWorkDay</div>
+                <div class="plan-item-value">{{planSummary.estimateWorkDay}}</div>
+            </div>
+            <div class="plan-item">
+                <div class="plan-item-label">dataLock</div>
+                <div class="plan-item-value">{{planSummary.dataLock}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="planDetail-area"> 
+        <h3 class="page-heading">Line Plan Detail | {{planSummary.line.name}}</h3>
+        <table class="table">
+            <tr>
+               <th>sewing Date</th>
+               <th>work Hour</th>
+               <th>day Terget</th>
+               <th>hour Terget</th>
+               <th>Line WIP</th>
+               <th>operator</th>
+               <th>helper</th>
+               <th>Action</th>
+            </tr>
+            {% for planDetails in planDetail%}
+            <tr>
+                <td>{{planDetails.sewingDate}}</td>
+                <td>{{planDetails.workHour}}</td>
+                <td>{{planDetails.dayTerget}}</td>
+                <td>{{planDetails.hourTerget}}</td>
+                <td>{{planDetails.LineWIP}}</td>
+                <td>{{planDetails.operator}}</td>
+                <td>{{planDetails.helper}}</td>
+                <td>
+                    {% if planDetails.dataLock == 'N' %}
+                    <div class="tooltip">
+                        <a href="#" class="button btn-green btn-r12 tooltip">E</a>
+                        <span class="tooltiptext">Line Edit</span>
+                    </div>
+                    <div class="tooltip">
+                    <a href="{% url 'line-lock' planDetails.id %}" class="button btn-blue btn-r12">L</a>
+                        <span class="tooltiptext">Line Lock</span>
+                    </div>
+                    <div class="tooltip">
+                        <a href="{% url 'line-delete' planDetails.id %}" class="button btn-red btn-r12">D</a>
+                        <span class="tooltiptext">Line Delete</span>
+                    </div>
+                    {% else %}
+                        <a href="{% url 'line-lock' planDetails.id %}" class="button btn-red btn-r12">Lock</a>
+                    {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div> 
+{% endblock content %}

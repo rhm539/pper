@@ -1,0 +1,61 @@
+{% extends 'partials/base.html' %} 
+{% load static %} 
+{% block title %}Plan Layout{% endblock title %} 
+{% load crispy_forms_tags %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/plan/plan_layout.css' %}" />{% endblock css %}  
+{% block content %}
+<div class="line-Plan-Show block-content">
+    <h3 class="page-heading">Plan Layout | {{mydate}} </h3>
+    {% include 'partials/extra_navbar.html'%}
+    <div class="production-area"> 
+        <table class="table">
+            <tr>
+               <th>Line</th>
+               <th>Buyer</th>
+               <th>Style</th>
+               <th>SMV</th>
+               <th>Sewing Date</th>
+               <th>work Hour</th>
+               <th>Day Terget</th>
+               <th>Hour Terget</th>
+               <th>Action</th>
+            </tr>
+            {% for productions in production %}
+            <tr>
+                <td>{{productions.plan.line}}</td>
+                <td>{{productions.plan.buyer}}</td>
+                <td>{{productions.plan.style}}</td>
+                <td>{{productions.plan.style.smv}}</td>
+                <td>{{productions.sewingDate}}</td>
+                <td>{{productions.workHour}}</td>
+                <td>{{productions.dayTerget}}</td>
+                <td>{{productions.hourTerget}}</td>
+                <td>
+                    {% if productions.dataLock == 'N' %}
+                    <div class="tooltip">
+                        <a href="{% url 'plan-Entry-show' productions.plan %}" class="button btn-green btn-r12">V</a>
+                        <span class="tooltiptext">Line Detail</span>
+                    </div>
+                    <div class="tooltip">
+                        <a href="{% url 'plan-line-move' productions.id %}" class="button btn-blue btn-r12">M</a>
+                        <span class="tooltiptext">Line Move to Last</span>
+                    </div>
+                    <div class="tooltip">
+                        <a href="{% url 'plan-line-lock' productions.id %}" class="button btn-red btn-r12">L</a>
+                        <span class="tooltiptext">Line Lock</span>
+                    </div>
+                    {% else %}
+                    <div class="tooltip">
+                        <a href="{% url 'plan-line-lock' productions.id %}" class="button btn-red btn-r12">Lock</a>
+                        <span class="tooltiptext">Line Lock</span>
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock content %}

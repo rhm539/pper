@@ -5,17 +5,24 @@
 
 .card-description {
     display: flex;
-    font-size: 14px;
+
     justify-content: space-between;
     align-items: center;
     margin-top: 5px;
 
 }
 
+.card-btn {
+    display: flex;
+    flex-direction: row;
+}
 
+.card-btn p {
+    margin-right: 1px;
+}
 
 .dashboard-index .button {
-    font-size: 14px;
+
     margin: 0;
 }
 

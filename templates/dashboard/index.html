@@ -11,8 +11,12 @@
         <div class="card-container">
           <h4 class="card-title"><b>{{line.name}}</b></h4>
           <div class="card-item">
-            <div class="card-description"><h5>Plan</h5>
+            <div class="card-description">
+              <h5>Plan</h5>
+              <div class="card-btn">
+              <p><a href="{% url 'line-Plan-Show' line.id %}" class="button btn-gray btn-r12">View</a></p>
               <p><a href="{% url 'plan-Entry' line.id %}" class="button btn-green btn-r12">Create</a></p>
+              </div>
             </div> 
             <div class="card-description"><h5>Production</h5>
               <p>720</p>

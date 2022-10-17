@@ -1,8 +1,11 @@
-
 from django.db import models
 from setup.models import *
 from plan.models import *
 # Create your models here.
+datastatus = (
+    ('Y', 'YES'),
+    ('N', 'NO'),
+)
 
 
 class production(models.Model):
@@ -14,12 +17,21 @@ class production(models.Model):
     #style= models.ForeignKey(Style, models.CASCADE, null=True)
     #HourTerget = models.PositiveSmallIntegerField(default=0)
     #DayTT = models.PositiveSmallIntegerField(default=0)
-    workHour = models.PositiveSmallIntegerField(default=10)
-    dayTerget = models.PositiveSmallIntegerField(default=0)
-    hourTerget = models.PositiveSmallIntegerField(default=0)
-    LineWIP = models.PositiveSmallIntegerField(default=0, blank=True)
+    manpower = models.PositiveSmallIntegerField(default=0, blank=True)
     operator = models.PositiveSmallIntegerField(default=0, blank=True)
     helper = models.PositiveSmallIntegerField(default=0, blank=True)
+    runDay = models.DecimalField(default=0, max_digits=5, decimal_places=2)
+    dotHour = models.PositiveSmallIntegerField(default=0, blank=True)
+    workHour = models.PositiveSmallIntegerField(default=10)
+    dayTarget = models.PositiveSmallIntegerField(default=0)
+    hourTarget = models.PositiveSmallIntegerField(default=0)
+    dayAchievement = models.PositiveSmallIntegerField(default=0, blank=True)
+    targetEfficiency = models.DecimalField(
+        default=0, max_digits=5, decimal_places=2)
+    achievementEfficiency = models.DecimalField(
+        default=0, max_digits=5, decimal_places=2)
+    vari = models.PositiveSmallIntegerField(default=0, blank=True)
+    LineWIP = models.PositiveSmallIntegerField(default=0, blank=True)
     H_8_9 = models.PositiveSmallIntegerField(default=0, blank=True)
     H_9_10 = models.PositiveSmallIntegerField(default=0, blank=True)
     H_10_11 = models.PositiveSmallIntegerField(default=0, blank=True)
@@ -33,8 +45,10 @@ class production(models.Model):
     H_19_20 = models.PositiveSmallIntegerField(default=0, blank=True)
     H_20_21 = models.PositiveSmallIntegerField(default=0, blank=True)
     H_21_22 = models.PositiveSmallIntegerField(default=0, blank=True)
+    totalProduction = models.PositiveSmallIntegerField(default=0, blank=True)
     #
-    dataLock = models.BooleanField(default=False)
+    dataLock = models.CharField(
+        max_length=2, default='N', choices=datastatus, null=True)
     staff = models.ForeignKey(User, models.CASCADE, null=True)
     created_at = models.DateField(default=timezone.now)
     modified = models.DateField(auto_now=True)

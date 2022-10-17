@@ -45,4 +45,6 @@ urlpatterns = [
         template_name='commons/password-reset/password_reset_complete.html'), name='password_reset_complete'),
     path('setup/', include('setup.urls')),
     path('plan/', include('plan.urls')),
+    path('production/', include('production.urls')),
+    path('report/', include('report.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

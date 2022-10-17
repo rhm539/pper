@@ -11,11 +11,41 @@
                     <li class="subitem"><a href="{% url 'style-list'%}">Style Add</a></li>
                 </ul>
             </li>
-            {% if request.user.profile.unit.shortcut == 'BRL' %}
-            {% include 'partials/brl.html'%}
-            {% elif request.user.profile.unit.shortcut == 'FSL'%}
-            {% include 'partials/fsl.html'%}
-            {% endif %}
+            <!-- For two Factory -->
+            <li class="item has-submenu">
+                <a tabindex="0">Plans</a>
+                <ul class="submenu">
+                    <li class="subitem"><a href="{% url 'Plan-Layout'%}">Plan Layout</a></li>
+                    <li class="subitem"><a href="{% url 'forcast-table'%}">Forcast</a></li>
+                    <li class="subitem"><a href="#">SEO</a></li>
+                    <li class="subitem"><a href="#">Copywriting</a></li>
+                </ul>
+            </li>
+            <li class="item has-submenu">
+                <a tabindex="0">Production</a>
+                <ul class="submenu">
+                    <li class="subitem"><a href="{% url 'Line-Layout'%}">Line Layout</a></li>
+                    <li class="subitem"><a href="#">Startup</a></li>
+                    <li class="subitem"><a href="#">Enterprise</a></li>
+                </ul>
+            </li>
+            <li class="item has-submenu">
+                <a tabindex="0">Efficiency</a>
+                <ul class="submenu">
+                    <li class="subitem"><a href="#">Freelancer</a></li>
+                    <li class="subitem"><a href="#">Startup</a></li>
+                    <li class="subitem"><a href="#">Enterprise</a></li>
+                </ul>
+            </li>
+            <li class="item has-submenu">
+                <a tabindex="0">Report</a>
+                <ul class="submenu">
+                    <li class="subitem"><a href="{% url 'report-day-production' 1 %}">FSL Production</a></li>
+                    <li class="subitem"><a href="{% url 'report-day-production' 2 %}">BRL Production</a></li>
+                    <li class="subitem"><a href="#">Startup</a></li>
+                    <li class="subitem"><a href="#">Enterprise</a></li>
+                </ul>
+            </li>
             <li class="item"><a href="#">Contact</a></li>
             <li class="item button btn-red btn-r12 "><a href="{% url 'logout' %}">Log Out<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
             <li class="item button btn-gray btn-r12 secondary"><a href="#">Sign Up<i class="fa fa-user-plus" aria-hidden="true"></i></a></li>

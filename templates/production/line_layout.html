@@ -1,0 +1,44 @@
+{% extends 'partials/base.html' %} 
+{% load static %} 
+{% block title %}Line Layout{% endblock title %} 
+{% load crispy_forms_tags %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/production/line_layout.css' %}" />{% endblock css %}  
+{% block content %}
+<div class="line-Plan-Show block-content">
+    <h3 class="page-heading">Line Layout | {{mydate}}</h3>
+    {% include 'partials/extra_navbar.html'%}
+    <div class="production-area"> 
+        <table class="table">
+            <tr>
+               <th>Line</th>
+               <th>Buyer</th>
+               <th>Style</th>
+               <th>SMV</th>
+               <th>Sewing Date</th>
+               <th>workHour</th>
+               <th>Day Terget</th>
+               <th>Hour Terget</th>
+               <th>Data Lock</th>
+               <th>Action</th>
+            </tr>
+            {% for productions in production %}
+            <tr>
+                <td>
+                    <a href="{% url 'hourly-report-Entry' productions.id %}" class="button btn-green btn-r12">
+                        {{productions.plan.line}}</a>
+                    </td>
+                <td>{{productions.plan.buyer}}</td>
+                <td>{{productions.plan.style}}</td>
+                <td>{{productions.plan.style.smv}}</td>
+                <td>{{productions.sewingDate}}</td>
+                <td>{{productions.workHour}}</td>
+                <td>{{productions.dayTerget}}</td>
+                <td>{{productions.hourTerget}}</td>
+                <td>{{productions.dataLock}}</td>
+                <td><a href="{% url 'plan-Entry-show' productions.plan %}" class="button btn-green btn-r12">View</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock content %}

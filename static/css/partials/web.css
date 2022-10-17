@@ -30,7 +30,6 @@
     font-size: 52px;
     line-height: 1.2;
     font-weight: 400;
-    text-transform: capitalize;
 }
 
 .explore_btn {
@@ -147,7 +146,7 @@ footer {
 }
 
 .link_lists ul li {
-    font-size: 16px;
+
     margin-bottom: 5px;
 }
 
