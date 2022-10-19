@@ -44,30 +44,51 @@ def line_layout(request):
     return render(request, 'production/line_layout.html', context)
 
 
-def hourly_report_entry(request, pk):
+def hourly_report_entry(request, Data):
+    Data
+    print('rob')
+    return Data
+
+
+def hourly_report_entry_plan(request, pk):
     productionData = production.objects.get(pk=pk)
     mydate = productionData.sewingDate
-    # print(productionData.plan.line.name)
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
         form = productionHourForm(request.POST, instance=productionData)
-        # check whether it's valid:
         if form.is_valid():
-            form.save()
+            Data = form.save(commit=False)
+            #Data = hourly_report_entry(Data)
+            Data.save()
             messages.success(request, 'Successful, Buyer Add in PPER System')
             return redirect('line-Layout-nav', mydate)
-        else:
-            form = productionHourForm()
-            messages.warning(
-                request, 'Unsuccessful, Buyer Cannot Add in PPER System')
-    # if a GET (or any other method) we'll create a blank form
     else:
         form = productionHourForm(instance=productionData)
     context = {
         'form': form,
         'production': productionData,
     }
-    return render(request, 'production/hourly_report_entry.html', context)
+    return render(request, 'production/hourly_report_entry_plan.html', context)
+
+
+def hourly_report_entry_detail(request, pk):
+    productionData = production.objects.get(pk=pk)
+    mydate = productionData.sewingDate
+    if request.method == 'POST':
+        form = productionHourForm(request.POST, instance=productionData)
+        if form.is_valid():
+            Data = form.save(commit=False)
+            #Data = hourly_report_entry(Data)
+            Data.save()
+            messages.success(request, 'Successful, Buyer Add in PPER System')
+            return redirect('plan-Entry-show', productionData.plan.id)
+
+    else:
+        form = productionHourForm(instance=productionData)
+    context = {
+        'form': form,
+        'production': productionData,
+    }
+    return render(request, 'production/hourly_report_entry_detail.html', context)
 
 
 def line_delete(request, pk):

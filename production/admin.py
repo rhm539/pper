@@ -5,4 +5,8 @@ from production.models import production
 # Register your models here.
 
 
-admin.site.register(production)
+class productionAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'planID', 'plan', 'sewingDate')
+
+
+admin.site.register(production, productionAdmin)

@@ -24,7 +24,7 @@
             {% for productions in production %}
             <tr>
                 <td>
-                    <a href="{% url 'hourly-report-Entry' productions.id %}" class="button btn-green btn-r12">
+                    <a href="{% url 'hourly-report-Entry-plan' productions.id %}" class="button btn-green btn-r12">
                         {{productions.plan.line}}</a>
                     </td>
                 <td>{{productions.plan.buyer}}</td>

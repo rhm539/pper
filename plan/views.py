@@ -139,6 +139,37 @@ def planEntry(request, pk):
     return render(request, 'plan/planEntry.html', context)
 
 
+def planEdit(request, pk):
+    planData = plan.objects.get(id=pk)
+    productionData = production.objects.filter(plan=pk, dataLock='N')
+    if request.method == 'POST':
+        form = PlanForm(request.POST, instance=planData)
+        if form.is_valid():
+            planData = form.save(commit=False)
+            datePass = planDate(planData.deleveryDate,
+                                planData.inputDate, planData.sewingEndDate)
+            if planData.orderQty > 0 and datePass is True:
+                planData.planQtyExtra = percentageToAmount(
+                    planData.orderQty, planData.planQtyExtra)
+                planData.buyer = planData.style.buyer
+                planData.staff = request.user
+                planData.save()
+                for productions in productionData:
+                    productions.style = planData.style
+                    productions.save()
+                messages.success(
+                    request, 'Successful, Plan Update in PPER System')
+                return redirect('plan-Entry-show', planData.pk)
+
+    else:
+        form = PlanForm(instance=planData)
+    context = {
+        'form': form,
+        'pk': pk,
+    }
+    return render(request, 'plan/planEdit.html', context)
+
+
 def planEnt_show(request, pk):
     planSummary = plan.objects.get(pk=pk)
     planDetail = production.objects.filter(plan=pk)

@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="tooltip editPlan">
-            <a href="#" class="button btn-blue btn-r12">Edit Plan</a>
+            <a href="{% url 'plan-Edit' planSummary.id %}" class="button btn-blue btn-r12">Edit Plan</a>
             <span class="tooltiptext">edit Plan</span>
         </div>
     </div>
@@ -98,7 +98,7 @@
                 <td>
                     {% if planDetails.dataLock == 'N' %}
                     <div class="tooltip">
-                        <a href="#" class="button btn-green btn-r12 tooltip">E</a>
+                        <a href="{% url 'hourly-report-Entry-detail' planDetails.id %}" class="button btn-green btn-r12 tooltip">E</a>
                         <span class="tooltiptext">Line Edit</span>
                     </div>
                     <div class="tooltip">

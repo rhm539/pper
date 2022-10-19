@@ -22,7 +22,7 @@ class productionHourForm(forms.ModelForm):
             'H_20_21',
             'H_21_22',
             'LineWIP',
-            'dataLock',
+            'sewingDate',
         ]
         labels = {
             'H_8_9': '8AM to 9AM',
@@ -39,5 +39,5 @@ class productionHourForm(forms.ModelForm):
             'H_20_21': '8PM to 9PM',
             'H_21_22': '9PM to 10PM',
             'LineWIP': 'Line WIP',
-            'dataLock': 'Data Lock',
+            'sewingDate': 'sewingDate',
         }

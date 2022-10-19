@@ -7,6 +7,7 @@ register_converter(views.DateConverter, 'date')
 
 urlpatterns = [
     path('planEntry/<int:pk>/', views.planEntry, name='plan-Entry'),
+    path('planEdit/<int:pk>/', views.planEdit, name='plan-Edit'),
     path('planEntryShow/<int:pk>/', views.planEnt_show, name='plan-Entry-show'),
     path('line/Plan/show/<int:pk>/', views.linePlan_show, name='line-Plan-Show'),
     path('Plan/layout/', views.Plan_layout, name='Plan-Layout'),
