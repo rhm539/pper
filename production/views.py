@@ -1,5 +1,7 @@
+from django.shortcuts import render
 from datetime import date, datetime
 from django.shortcuts import redirect, render
+from plan.forms import planAddForms
 from plan.views import Plan_layout_day, findOutDate, unitKnow
 from production.forms import productionHourForm
 from django.contrib import messages
@@ -73,7 +75,7 @@ def line_delete(request, pk):
     plan = production.objects.filter(plan=productionData.plan)
     pk = productionData.plan
     lineCount = plan.count()
-    if productionData.totalProduction > 0:
+    if productionData.totalProduction == 0:
         if lineCount > 1:
             productionData.delete()
             messages.warning(
@@ -86,7 +88,7 @@ def line_delete(request, pk):
                 request, 'Unsuccessful, Line and Plan Delete in PPER System')
             return redirect('forcast-table')
     else:
-        messages.warning(
+        messages.info(
             request, 'Unsuccessful, Line Cannot Delete in PPER System')
         return redirect('plan-Entry-show', pk)
 

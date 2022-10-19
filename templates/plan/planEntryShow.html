@@ -24,6 +24,10 @@
                 <div class="plan-item-value">{{planSummary.unit}}</div>
             </div>
             <div class="plan-item">
+                <div class="plan-item-label">line</div>
+                <div class="plan-item-value">{{planSummary.line}}</div>
+            </div>
+            <div class="plan-item">
                 <div class="plan-item-label">buyer</div>
                 <div class="plan-item-value">{{planSummary.buyer}}</div>
             </div>
@@ -32,41 +36,41 @@
                 <div class="plan-item-value">{{planSummary.style}}</div>
             </div>
             <div class="plan-item">
-                <div class="plan-item-label">line</div>
-                <div class="plan-item-value">{{planSummary.line}}</div>
-            </div>
-            <div class="plan-item">
-                <div class="plan-item-label">deleveryDate</div>
+                <div class="plan-item-label">delevery Date</div>
                 <div class="plan-item-value">{{planSummary.deleveryDate}}</div>
             </div>
             <div class="plan-item">
-                <div class="plan-item-label">inputDate</div>
+                <div class="plan-item-label">input Date</div>
                 <div class="plan-item-value">{{planSummary.inputDate}}</div>
             </div>
             <div class="plan-item">
-                <div class="plan-item-label">sewingEndDate</div>
+                <div class="plan-item-label">sewing End Date</div>
                 <div class="plan-item-value">{{planSummary.sewingEndDate}}</div>
             </div>
             <div class="plan-item">
-                <div class="plan-item-label">orderQty</div>
+                <div class="plan-item-label">order Qty</div>
                 <div class="plan-item-value">{{planSummary.orderQty}}</div>
             </div>
             <div class="plan-item">
-                <div class="plan-item-label">planQtyExtra</div>
+                <div class="plan-item-label">plan Qty Extra</div>
                 <div class="plan-item-value">{{planSummary.planQtyExtra}}</div>
             </div>
             <div class="plan-item">
-                <div class="plan-item-label">linePlanQty</div>
+                <div class="plan-item-label">line Plan Qty</div>
                 <div class="plan-item-value">{{planSummary.linePlanQty}}</div>
             </div>
             <div class="plan-item">
-                <div class="plan-item-label">estimateWorkDay</div>
+                <div class="plan-item-label">estimate Work Day</div>
                 <div class="plan-item-value">{{planSummary.estimateWorkDay}}</div>
             </div>
             <div class="plan-item">
-                <div class="plan-item-label">dataLock</div>
+                <div class="plan-item-label">data Lock</div>
                 <div class="plan-item-value">{{planSummary.dataLock}}</div>
             </div>
+        </div>
+        <div class="tooltip editPlan">
+            <a href="#" class="button btn-blue btn-r12">Edit Plan</a>
+            <span class="tooltiptext">edit Plan</span>
         </div>
     </div>
     <div class="planDetail-area"> 
@@ -112,6 +116,15 @@
                 </td>
             </tr>
             {% endfor %}
+            <tr>
+                <td colspan="7"></td>
+                <td>
+                    <div class="tooltip">
+                        <a href="#" class="button btn-blue btn-r12">Add day</a>
+                        <span class="tooltiptext">Add Plan</span>
+                    </div>
+                </td>
+            </tr>
         </table>
     </div>
 </div> 

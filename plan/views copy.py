@@ -7,7 +7,7 @@ from plan.models import plan
 from production.models import production
 from django.forms import modelformset_factory
 
-from setup.models import style, line
+from setup.models import buyer, style, line
 # Create your views here.
 
 #
@@ -114,9 +114,6 @@ def planEntry(request, pk):
                         productionPlan.unit = lineData.unit
                         productionPlan.planID = planData.planID
                         productionPlan.plan = planData
-                        productionPlan.style = planData.style
-                        productionPlan.line = planData.line
-                        productionPlan.floor = planData.line.floor
                         productionPlan.staff = request.user
                         productionPlan.save()
                     sewingDate += timedelta(days=1)
@@ -255,7 +252,7 @@ def plan_line_move(request, pk):
 
 def add_plan(request, mydate):
     productionData = production.objects.filter(sewingDate=mydate, dataLock='N')
-    planFormSet = modelformset_factory(production, planAddForms, extra=0)
+    planFormSet = modelformset_factory(production, planAddForms)
     if request.method == 'POST':
         formset = planFormSet(request.POST)
         if formset.is_valid():
@@ -266,6 +263,5 @@ def add_plan(request, mydate):
     context = {
         'formset': formset,
         'mydate': mydate,
-        'productionData': productionData,
     }
     return render(request, 'plan/add_plan.html', context)

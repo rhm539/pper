@@ -1,10 +1,7 @@
 from django import forms
-
-from plan.models import *
-
-from django.forms import ModelForm
-from django import forms
-
+from plan.models import plan
+from production.models import production
+from setup.models import *
 ##
 
 
@@ -43,3 +40,10 @@ class PlanForm(forms.ModelForm):
             elif self.instance.pk:
                 self.fields['style'].queryset = self.instance.buyer.style_set.order_by(
                     'name')
+
+
+class planAddForms(forms.ModelForm):
+    class Meta:
+        model = production
+        fields = ['line', 'style', 'operator', 'helper',
+                  'runDay', 'workHour', 'dayTarget']

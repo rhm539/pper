@@ -1,0 +1,59 @@
+{% extends 'partials/base.html' %} 
+{% load static %} 
+{% block title %}Line Plan Summary{% endblock title %} 
+{% load crispy_forms_tags %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/plan/add_plan.css' %}" />{% endblock css %}  
+{% block content %}
+<div class="add-Plan block-content">
+    <div class="messages">
+        {% if messages %}
+        {% for message in messages %}
+          <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    
+    <div class="card">
+      <h3 class="page-heading">Add Plan | {{mydate}}</h3>
+        <div class="card-container">
+          <form method="post" class="addPlanForm">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            <table>
+              <thead>
+                <tr>
+                  <td style="width:100px">line</td>
+                  <td style="width:30%">style</td>
+                  <td>operator</td>
+                  <td>helper</td>
+                  <td>run Day</td>
+                  <td>work Hour</td>
+                  <td>day Target</td>
+                </tr>
+              </thead>
+              <tbody>
+              {% for forms in formset %}
+                  {% csrf_token %}
+                                                              {% for hidden in forms.hidden_fields %}
+                                                                  {{ hidden }}
+                                                              {% endfor %}
+                                                              {{ formset.non_field_errors }}
+                
+                
+                        <tr>
+                            {% for field in forms %}
+                                <td>{{ field }}</td>
+                            {% endfor %}
+                        </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+          <div class="button_container">
+            <button type="Cancel" class="button btn-red btn-r12" ><a style="color:white" href="{% url 'Plan-Layout-nav' mydate %}">Cancel</a></button>
+            <button type="submit" class="button btn-green btn-r12" >Apply Now</button>
+          </div>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

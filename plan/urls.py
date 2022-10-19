@@ -15,5 +15,6 @@ urlpatterns = [
     path('plan/forcast/', views.forcast_table, name='forcast-table'),
     path('plan/line/lock/<int:pk>/', views.plan_line_lock, name='plan-line-lock'),
     path('plan/line/move/<int:pk>/', views.plan_line_move, name='plan-line-move'),
+    path('add/plan/<date:mydate>/', views.add_plan, name='add-plan'),
     path('style/', views.load_style, name='ajax_load_style'),  # AJAX
 ]

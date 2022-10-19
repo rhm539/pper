@@ -5,6 +5,13 @@
 {% block css %}<link rel="stylesheet" href="{% static 'css/plan/plan_layout.css' %}" />{% endblock css %}  
 {% block content %}
 <div class="line-Plan-Show block-content">
+    <div class="messages">
+        {% if messages %}
+        {% for message in messages %}
+          <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+      </div>
     <h3 class="page-heading">Plan Layout | {{mydate}} </h3>
     {% include 'partials/extra_navbar.html'%}
     <div class="production-area"> 
@@ -54,6 +61,13 @@
             </tr>
             {% endfor %}
             <tr>
+                <td colspan="8"></td>
+                <td>
+                    <div class="tooltip">
+                        <a href="{% url 'add-plan' mydate %}" class="button btn-blue btn-r12">Add Plan</a>
+                        <span class="tooltiptext">Add Plan</span>
+                    </div>
+                </td>
             </tr>
         </table>
     </div>

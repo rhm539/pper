@@ -1,12 +1,12 @@
 .plan-item {
     display: flex;
     flex-direction: row;
-
     justify-content: space-between;
     border: 1px solid gray;
     gap: 8px;
     padding: 8px 8px;
     border-radius: 8px;
+
 
 }
 
@@ -17,6 +17,10 @@
 
 .plan-item:hover {
     transform: scale(1.01);
+}
+
+.editPlan {
+    margin-top: 20px;
 }
 
 .planDetail-area {
