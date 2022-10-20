@@ -14,4 +14,5 @@ urlpatterns = [
          views.line_layout_nev, name='line-Layout-nav'),
     path('line/delete/<int:pk>/', views.line_delete, name='line-delete'),
     path('line/lock/<int:pk>/', views.line_lock, name='line-lock'),
+    path('line/add/<int:pk>/', views.line_add, name='line-add'),
 ]

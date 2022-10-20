@@ -148,7 +148,7 @@ def planEdit(request, pk):
             planData = form.save(commit=False)
             datePass = planDate(planData.deleveryDate,
                                 planData.inputDate, planData.sewingEndDate)
-            if planData.orderQty > 0 and datePass is True:
+            if planData.orderQty > 0 and planData.planQtyExtra < 10 and datePass is True:
                 planData.planQtyExtra = percentageToAmount(
                     planData.orderQty, planData.planQtyExtra)
                 planData.buyer = planData.style.buyer
@@ -160,7 +160,10 @@ def planEdit(request, pk):
                 messages.success(
                     request, 'Successful, Plan Update in PPER System')
                 return redirect('plan-Entry-show', planData.pk)
-
+            else:
+                form = PlanForm(instance=planData)
+                messages.warning(
+                    request, 'unsuccessful, please set 3 Qty.Extra field')
     else:
         form = PlanForm(instance=planData)
     context = {
@@ -170,9 +173,9 @@ def planEdit(request, pk):
     return render(request, 'plan/planEdit.html', context)
 
 
-def planEnt_show(request, pk):
+def plan_Entry_show(request, pk):
     planSummary = plan.objects.get(pk=pk)
-    planDetail = production.objects.filter(plan=pk)
+    planDetail = production.objects.filter(plan=pk).order_by('sewingDate')
     context = {
         'planSummary': planSummary,
         'planDetail': planDetail,
@@ -212,7 +215,7 @@ def Plan_layout(request):
 
 def Plan_layout_day(unit, dateData):
     productionData = production.objects.filter(
-        sewingDate=dateData, unit=unit)
+        sewingDate=dateData, unit=unit).order_by('line')
     return productionData
 
 
@@ -290,7 +293,13 @@ def add_plan(request, mydate):
     if request.method == 'POST':
         formset = planFormSet(request.POST)
         if formset.is_valid():
-            formset.save()
+            addPlanData = formset.save(commit=False)
+            for addPlan in addPlanData:
+                if addPlan.workHour > 0:
+                    addPlan.manpower = addPlan.operator+addPlan.helper
+                    addPlan.hourTarget = round(
+                        addPlan.dayTarget / addPlan.workHour)
+                    addPlan.save()
             return redirect('Plan-Layout-nav', mydate)
     else:
         formset = planFormSet(queryset=productionData)

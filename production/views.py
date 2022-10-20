@@ -2,6 +2,7 @@ from django.shortcuts import render
 from datetime import date, datetime
 from django.shortcuts import redirect, render
 from plan.forms import planAddForms
+from plan.models import plan
 from plan.views import Plan_layout_day, findOutDate, unitKnow
 from production.forms import productionHourForm
 from django.contrib import messages
@@ -44,10 +45,19 @@ def line_layout(request):
     return render(request, 'production/line_layout.html', context)
 
 
-def hourly_report_entry(request, Data):
-    Data
-    print('rob')
-    return Data
+def hourly_report_entry(Data):
+    dayAchievement = Data.H_8_9+Data.H_9_10+Data.H_10_11+Data.H_11_12+Data.H_12_13+Data.H_14_15 + \
+        Data.H_15_16+Data.H_16_17+Data.H_17_18+Data.H_18_19 + \
+        Data.H_19_20+Data.H_20_21+Data.H_21_22
+
+    Data.dayAchievement = dayAchievement
+    if Data.dayTarget > dayAchievement:
+        Data.vari = Data.dayTarget - dayAchievement
+    else:
+        Data.vari = 0
+    Data.save()
+
+    return None
 
 
 def hourly_report_entry_plan(request, pk):
@@ -57,8 +67,8 @@ def hourly_report_entry_plan(request, pk):
         form = productionHourForm(request.POST, instance=productionData)
         if form.is_valid():
             Data = form.save(commit=False)
-            #Data = hourly_report_entry(Data)
-            Data.save()
+            Data = hourly_report_entry(Data)
+            # Data.save()
             messages.success(request, 'Successful, Buyer Add in PPER System')
             return redirect('line-Layout-nav', mydate)
     else:
@@ -77,8 +87,8 @@ def hourly_report_entry_detail(request, pk):
         form = productionHourForm(request.POST, instance=productionData)
         if form.is_valid():
             Data = form.save(commit=False)
-            #Data = hourly_report_entry(Data)
-            Data.save()
+            Data = hourly_report_entry(Data)
+            # Data.save()
             messages.success(request, 'Successful, Buyer Add in PPER System')
             return redirect('plan-Entry-show', productionData.plan.id)
 
@@ -124,3 +134,41 @@ def line_lock(request, pk):
         productionData.dataLock = 'Y'
     productionData.save()
     return redirect('plan-Entry-show', productionData.plan)
+
+
+def line_add(request, pk):
+    planData = plan.objects.get(pk=pk)
+    #productionData = production.objects.get(plan=planData.id)
+    weekend = planData.unit.holiday
+    anyDay = planData.sewingEndDate
+    lastDay, curentDay, nextDay = findOutDate(anyDay)
+    dayName = nextDay.weekday()
+    if int(weekend) != int(dayName):
+        productionData = production()
+        productionData.sewingDate = nextDay
+        productionData.unit = planData.unit
+        productionData.plan = planData
+        productionData.planID = planData.planID
+        productionData.style = planData.style
+        productionData.line = planData.line
+        productionData.floor = planData.line.floor
+
+        planData.sewingEndDate = nextDay
+        planData.save()
+        productionData.save()
+    else:
+        lastDay, curentDay, nextDay = findOutDate(nextDay)
+        productionData = production()
+        productionData.sewingDate = nextDay
+        productionData.unit = planData.unit
+        productionData.plan = planData
+        productionData.planID = planData.planID
+        productionData.style = planData.style
+        productionData.line = planData.line
+        productionData.floor = planData.line.floor
+
+        planData.sewingEndDate = nextDay
+        planData.save()
+        productionData.save()
+    messages.success(request, 'Successful,  Day Added in PPER System')
+    return redirect('plan-Entry-show', planData.id)

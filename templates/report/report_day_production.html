@@ -7,12 +7,12 @@
 <div class="report block-content">
     <h3 class="page-heading">Daily Production Report | {{mydate}}</h3>
     {% include 'partials/extra_navbar_report.html'%}
-    <div class="production-area"> 
+    <div class="report-area"> 
         <table class="table">
             <tr>
-               <th>Line</th>
+               <th style="width:100px">Line</th>
                <th>Buyer</th>
-               <th>Style</th>
+               <th style="width:20%">Style</th>
                <th>SMV</th>
                <th>MO</th>
                <th>HP</th>
@@ -53,8 +53,8 @@
                 <td>{{productions.runDay}}</td>
                 <td>{{productions.dotHour}}</td>
                 <td>{{productions.workHour}}</td>
-                <td>{{productions.dayTerget}}</td>
-                <td>{{productions.hourTerget}}</td>
+                <td>{{productions.dayTarget}}</td>
+                <td>{{productions.hourTarget}}</td>
                 <td>{{productions.dayAchievement}}</td>
                 <td>{{productions.targetEfficiency}}</td>
                 <td>{{productions.achievementEfficiency}}</td>
@@ -78,4 +78,5 @@
         </table>
     </div>
 </div>
+
 {% endblock content %}

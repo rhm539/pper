@@ -10,31 +10,51 @@
     <div class="production-area"> 
         <table class="table">
             <tr>
-               <th>Line</th>
-               <th>Buyer</th>
-               <th>Style</th>
-               <th>SMV</th>
-               <th>Sewing Date</th>
-               <th>workHour</th>
-               <th>Day Terget</th>
-               <th>Hour Terget</th>
-               <th>Data Lock</th>
-               <th>Action</th>
+                <th>Line</th>
+                <th style="width:20%">Style</th>
+                <th>Hour Target</th>
+                <th>Day Achiev.</th>
+                <th>9 AM</th>
+                <th>10 AM</th>
+                <th>11 AM</th>
+                <th>12 PM</th>
+                <th>01 PM</th>
+                <th>03 PM</th>
+                <th>04 PM</th>
+                <th>05 PM</th>
+                <th>06 PM</th>
+                <th>07 PM</th>
+                <th>08 PM</th>
+                <th>09 PM</th>
+                <th>10 PM</th>
+                <th>Action</th>
             </tr>
             {% for productions in production %}
             <tr>
-                <td>
-                    <a href="{% url 'hourly-report-Entry-plan' productions.id %}" class="button btn-green btn-r12">
+                <td> {% if productions.dayTarget > 0 and productions.runDay > 0 and productions.manpower > 0 %}
+                        <a href="{% url 'hourly-report-Entry-plan' productions.id %}" class="button btn-green btn-r12">
+                        {{productions.plan.line}}</a>                
+                    {% else %}
+                        <a href="#" class="button btn-red btn-r12">
                         {{productions.plan.line}}</a>
-                    </td>
-                <td>{{productions.plan.buyer}}</td>
+                {% endif %}
+                </td>
                 <td>{{productions.plan.style}}</td>
-                <td>{{productions.plan.style.smv}}</td>
-                <td>{{productions.sewingDate}}</td>
-                <td>{{productions.workHour}}</td>
-                <td>{{productions.dayTerget}}</td>
-                <td>{{productions.hourTerget}}</td>
-                <td>{{productions.dataLock}}</td>
+                <td>{{productions.hourTarget}}</td>
+                <td>{{productions.dayAchievement}}</td>
+                <td>{{productions.H_8_9}}</td>
+                <td>{{productions.H_9_10}}</td>
+                <td>{{productions.H_10_11}}</td>
+                <td>{{productions.H_11_12}}</td>
+                <td>{{productions.H_12_13}}</td>
+                <td>{{productions.H_14_15}}</td>
+                <td>{{productions.H_15_16}}</td>
+                <td>{{productions.H_16_17}}</td>
+                <td>{{productions.H_17_18}}</td>
+                <td>{{productions.H_18_19}}</td>
+                <td>{{productions.H_19_20}}</td>
+                <td>{{productions.H_20_21}}</td>
+                <td>{{productions.H_21_22}}</td>
                 <td><a href="{% url 'plan-Entry-show' productions.plan %}" class="button btn-green btn-r12">View</a></td>
             </tr>
             {% endfor %}

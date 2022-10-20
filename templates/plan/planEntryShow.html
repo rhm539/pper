@@ -90,8 +90,8 @@
             <tr>
                 <td>{{planDetails.sewingDate}}</td>
                 <td>{{planDetails.workHour}}</td>
-                <td>{{planDetails.dayTerget}}</td>
-                <td>{{planDetails.hourTerget}}</td>
+                <td>{{planDetails.dayTarget}}</td>
+                <td>{{planDetails.hourTarget}}</td>
                 <td>{{planDetails.LineWIP}}</td>
                 <td>{{planDetails.operator}}</td>
                 <td>{{planDetails.helper}}</td>
@@ -120,8 +120,8 @@
                 <td colspan="7"></td>
                 <td>
                     <div class="tooltip">
-                        <a href="#" class="button btn-blue btn-r12">Add day</a>
-                        <span class="tooltiptext">Add Plan</span>
+                        <a href="{% url 'line-add' planSummary.id %}" class="button btn-blue btn-r12">Add day</a>
+                        <span class="tooltiptext">Add Day</span>
                     </div>
                 </td>
             </tr>

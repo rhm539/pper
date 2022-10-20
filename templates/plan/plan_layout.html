@@ -19,8 +19,10 @@
             <tr>
                <th>Line</th>
                <th>Buyer</th>
-               <th>Style</th>
+               <th style="width:20%">Style</th>
                <th>SMV</th>
+               <th>Man Power</th>
+               <th>Run day</th>
                <th>Sewing Date</th>
                <th>work Hour</th>
                <th>Day Terget</th>
@@ -33,10 +35,12 @@
                 <td>{{productions.plan.buyer}}</td>
                 <td>{{productions.plan.style}}</td>
                 <td>{{productions.plan.style.smv}}</td>
+                <td>{{productions.manpower}}</td>
+                <td>{{productions.runDay}}</td>
                 <td>{{productions.sewingDate}}</td>
                 <td>{{productions.workHour}}</td>
-                <td>{{productions.dayTerget}}</td>
-                <td>{{productions.hourTerget}}</td>
+                <td>{{productions.dayTarget}}</td>
+                <td>{{productions.hourTarget}}</td>
                 <td>
                     {% if productions.dataLock == 'N' %}
                     <div class="tooltip">
@@ -61,7 +65,7 @@
             </tr>
             {% endfor %}
             <tr>
-                <td colspan="8"></td>
+                <td colspan="10"></td>
                 <td>
                     <div class="tooltip">
                         <a href="{% url 'add-plan' mydate %}" class="button btn-blue btn-r12">Add Plan</a>
