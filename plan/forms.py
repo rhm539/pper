@@ -43,6 +43,8 @@ class PlanForm(forms.ModelForm):
 
 
 class planAddForms(forms.ModelForm):
+    line = forms.ModelChoiceField(queryset=line.objects.order_by('name'))
+
     class Meta:
         model = production
         fields = ['line', 'style', 'operator', 'helper',

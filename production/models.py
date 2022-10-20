@@ -21,7 +21,7 @@ class production(models.Model):
     operator = models.PositiveSmallIntegerField(default=0, blank=True)
     helper = models.PositiveSmallIntegerField(default=0, blank=True)
     runDay = models.DecimalField(default=0, max_digits=5, decimal_places=2)
-    dotHour = models.PositiveSmallIntegerField(default=0, blank=True)
+    #dotHour = models.PositiveSmallIntegerField(default=0, blank=True)
     workHour = models.PositiveSmallIntegerField(default=10)
     dayTarget = models.PositiveSmallIntegerField(default=0)
     hourTarget = models.PositiveSmallIntegerField(default=0)
@@ -45,7 +45,7 @@ class production(models.Model):
     H_19_20 = models.PositiveSmallIntegerField(default=0, blank=True)
     H_20_21 = models.PositiveSmallIntegerField(default=0, blank=True)
     H_21_22 = models.PositiveSmallIntegerField(default=0, blank=True)
-    totalProduction = models.PositiveSmallIntegerField(default=0, blank=True)
+    #totalProduction = models.PositiveSmallIntegerField(default=0, blank=True)
     #
     dataLock = models.CharField(
         max_length=2, default='N', choices=datastatus, null=True)

@@ -11,6 +11,11 @@ from production.models import production
 
 # Create your views here.
 
+# ((Output*SMV)/(Manpower*(Working*60)))*100
+def EfficiencyCaculator(Output, SMV, Manpower, Working):
+    Efficiency = ((Output*SMV)/(Manpower*(Working*60))) * 100
+    return Efficiency
+
 
 def line_layout_nev(request, mydate):
     unit = unitKnow(request)
@@ -55,6 +60,13 @@ def hourly_report_entry(Data):
         Data.vari = Data.dayTarget - dayAchievement
     else:
         Data.vari = 0
+    if Data.dayTarget > 0 and Data.style.smv > 0 and Data.manpower > 0 and Data.workHour > 0:
+        Data.targetEfficiency = EfficiencyCaculator(
+            Data.dayTarget, Data.style.smv, Data.manpower, Data.workHour)
+
+        Data.achievementEfficiency = EfficiencyCaculator(
+            Data.dayAchievement, Data.style.smv, Data.manpower, Data.workHour)
+
     Data.save()
 
     return None
