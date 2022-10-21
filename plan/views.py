@@ -137,6 +137,7 @@ def planEntry(request, pk):
     context = {
         'form': form,
         'pk': pk,
+        'lineName': lineData.name,
     }
     return render(request, 'plan/planEntry.html', context)
 
@@ -171,6 +172,7 @@ def planEdit(request, pk):
     context = {
         'form': form,
         'pk': pk,
+
     }
     return render(request, 'plan/planEdit.html', context)
 
@@ -297,7 +299,10 @@ def add_plan(request, mydate):
         if formset.is_valid():
             addPlanData = formset.save(commit=False)
             for addPlan in addPlanData:
+                planData = plan.objects.get(pk=addPlan.plan.id)
                 if addPlan.workHour > 0:
+                    addPlan.line = planData.line
+                    addPlan.style = planData.style
                     addPlan.manpower = addPlan.operator+addPlan.helper
                     addPlan.hourTarget = round(
                         addPlan.dayTarget / addPlan.workHour)

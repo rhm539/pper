@@ -52,6 +52,49 @@ def line_layout(request):
 
 
 def hourly_report_entry(Data):
+
+    if Data.H_8_9 is None:
+        Data.H_8_9 = 0
+
+    if Data.H_9_10 is None:
+        Data.H_9_10 = 0
+
+    if Data.H_10_11 is None:
+        Data.H_10_11 = 0
+
+    if Data.H_11_12 is None:
+        Data.H_11_12 = 0
+
+    if Data.H_12_13 is None:
+        Data.H_12_13 = 0
+
+    if Data.H_14_15 is None:
+        Data.H_14_15 = 0
+
+    if Data.H_15_16 is None:
+        Data.H_15_16 = 0
+
+    if Data.H_16_17 is None:
+        Data.H_16_17 = 0
+
+    if Data.H_17_18 is None:
+        Data.H_17_18 = 0
+
+    if Data.H_18_19 is None:
+        Data.H_18_19 = 0
+
+    if Data.H_19_20 is None:
+        Data.H_19_20 = 0
+
+    if Data.H_20_21 is None:
+        Data.H_20_21 = 0
+
+    if Data.H_21_22 is None:
+        Data.H_21_22 = 0
+
+    if Data.LineWIP is None:
+        Data.LineWIP = 0
+
     dayAchievement = Data.H_8_9+Data.H_9_10+Data.H_10_11+Data.H_11_12+Data.H_12_13+Data.H_14_15 + \
         Data.H_15_16+Data.H_16_17+Data.H_17_18+Data.H_18_19 + \
         Data.H_19_20+Data.H_20_21+Data.H_21_22
@@ -120,17 +163,17 @@ def line_delete(request, pk):
     plan = production.objects.filter(plan=productionData.plan)
     pk = productionData.plan
     lineCount = plan.count()
-    if productionData.totalProduction == 0:
+    if productionData.dayAchievement == 0:
         if lineCount > 1:
             productionData.delete()
             messages.warning(
-                request, 'Unsuccessful, Line Delete in PPER System')
+                request, 'Successful, Line Delete in PPER System')
             return redirect('plan-Entry-show', pk)
         else:
             productionData.delete()
             plan.delete()
             messages.warning(
-                request, 'Unsuccessful, Line and Plan Delete in PPER System')
+                request, 'Successful, Line and Plan Delete in PPER System')
             return redirect('forcast-table')
     else:
         messages.info(
