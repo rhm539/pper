@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from datetime import date, datetime, timedelta
 from django.shortcuts import render
 from django.contrib import messages
@@ -86,6 +87,7 @@ def load_style(request):
     # return JsonResponse(list(cities.values('id', 'name')), safe=False)
 
 
+@login_required
 def planEntry(request, pk):
     lineData = line.objects.get(pk=pk)
     weekend = lineData.unit.holiday

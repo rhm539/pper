@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from datetime import date, datetime
 from django.shortcuts import redirect, render
@@ -92,6 +93,7 @@ def hourly_report_entry_plan(request, pk):
     return render(request, 'production/hourly_report_entry_plan.html', context)
 
 
+@login_required
 def hourly_report_entry_detail(request, pk):
     productionData = production.objects.get(pk=pk)
     mydate = productionData.sewingDate

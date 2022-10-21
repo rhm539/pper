@@ -1,10 +1,11 @@
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 from setup.models import line
 
 # Create your views here.
 
 
+@login_required
 def index(request, unit):
     unitline = line.objects.all().filter(unit=unit)
 

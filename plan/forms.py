@@ -49,3 +49,6 @@ class planAddForms(forms.ModelForm):
         model = production
         fields = ['line', 'style', 'operator', 'helper',
                   'runDay', 'workHour', 'dayTarget']
+        widgets = {
+            'line': forms.TextInput(attrs={'readonly': 'readonly'})
+        }

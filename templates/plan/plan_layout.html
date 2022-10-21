@@ -23,7 +23,6 @@
                <th>SMV</th>
                <th>Man Power</th>
                <th>Run day</th>
-               <th>Sewing Date</th>
                <th>work Hour</th>
                <th>Day Terget</th>
                <th>Hour Terget</th>
@@ -37,7 +36,6 @@
                 <td>{{productions.plan.style.smv}}</td>
                 <td>{{productions.manpower}}</td>
                 <td>{{productions.runDay}}</td>
-                <td>{{productions.sewingDate}}</td>
                 <td>{{productions.workHour}}</td>
                 <td>{{productions.dayTarget}}</td>
                 <td>{{productions.hourTarget}}</td>
@@ -65,7 +63,7 @@
             </tr>
             {% endfor %}
             <tr>
-                <td colspan="10"></td>
+                <td colspan="9"></td>
                 <td>
                     <div class="tooltip">
                         <a href="{% url 'add-plan' mydate %}" class="button btn-blue btn-r12">Add Plan</a>

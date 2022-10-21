@@ -1,3 +1,20 @@
+* {
+    font-size: 16px;
+}
+
+.line-num {
+    width: 120px;
+}
+
 .addPlanForm {
     margin: 20px;
+}
+
+tbody td {
+    padding: 5px 2px;
+}
+
+select,
+input {
+    padding: 10px;
 }
