@@ -10,9 +10,9 @@
     <div class="report-area"> 
         <table class="table">
             <tr>
-               <th style="width:100px">Line</th>
+               <th class="line-num">Line</th>
                <th>Buyer</th>
-               <th style="width:20%">Style</th>
+               <th class="B-style">Style</th>
                <th>SMV</th>
                <th>MO</th>
                <th>HP</th>
@@ -40,39 +40,104 @@
                <th>09 PM</th>
                <th>10 PM</th>
             </tr>
-            {% for productions in production %}
-            <tr>
-                <td>{{productions.plan.line}}</td>
-                <td>{{productions.plan.buyer}}</td>
-                <td>{{productions.plan.style}}</td>
-                <td>{{productions.plan.style.smv}}</td>
-                <td>{{productions.operator}}</td>
-                <td>{{productions.helper}}</td>
-                <td>{{productions.manpower}}</td>
-                <td>{{productions.runDay}}</td>
-                <td>{{productions.workHour}}</td>
-                <td>{{productions.dayTarget}}</td>
-                <td>{{productions.hourTarget}}</td>
-                <td>{{productions.dayAchievement}}</td>
-                <td>{{productions.targetEfficiency}}</td>
-                <td>{{productions.achievementEfficiency}}</td>
-                <td>{{productions.vari}}</td>
-                <td>{{productions.LineWIP}}</td>
-                <td>{{productions.H_8_9}}</td>
-                <td>{{productions.H_9_10}}</td>
-                <td>{{productions.H_10_11}}</td>
-                <td>{{productions.H_11_12}}</td>
-                <td>{{productions.H_12_13}}</td>
-                <td>{{productions.H_14_15}}</td>
-                <td>{{productions.H_15_16}}</td>
-                <td>{{productions.H_16_17}}</td>
-                <td>{{productions.H_17_18}}</td>
-                <td>{{productions.H_18_19}}</td>
-                <td>{{productions.H_19_20}}</td>
-                <td>{{productions.H_20_21}}</td>
-                <td>{{productions.H_21_22}}</td>
-            </tr>
+            {% for floorList, floorData in list %}
+                {% for productions in production %}
+                    {% if productions.plan.line.floor == floorData %}
+                <tr>
+                    <td class="line-num">{{productions.plan.line}}</td>
+                    <td>{{productions.plan.buyer}}</td>
+                    <td>{{productions.plan.style}}</td>
+                    <td>{{productions.plan.style.smv}}</td>
+                    <td>{{productions.operator}}</td>
+                    <td>{{productions.helper}}</td>
+                    <td>{{productions.manpower}}</td>
+                    <td>{{productions.runDay}}</td>
+                    <td>{{productions.workHour}}</td>
+                    <td>{{productions.dayTarget}}</td>
+                    <td>{{productions.hourTarget}}</td>
+                    <td>{{productions.dayAchievement}}</td>
+                    <td>{{productions.targetEfficiency}}</td>
+                    <td>{{productions.achievementEfficiency}}</td>
+                    <td>{{productions.vari}}</td>
+                    <td>{{productions.LineWIP}}</td>
+                    <td>{{productions.H_8_9}}</td>
+                    <td>{{productions.H_9_10}}</td>
+                    <td>{{productions.H_10_11}}</td>
+                    <td>{{productions.H_11_12}}</td>
+                    <td>{{productions.H_12_13}}</td>
+                    <td>{{productions.H_14_15}}</td>
+                    <td>{{productions.H_15_16}}</td>
+                    <td>{{productions.H_16_17}}</td>
+                    <td>{{productions.H_17_18}}</td>
+                    <td>{{productions.H_18_19}}</td>
+                    <td>{{productions.H_19_20}}</td>
+                    <td>{{productions.H_20_21}}</td>
+                    <td>{{productions.H_21_22}}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                <tr>
+                    <th></th>
+                    <th colspan="3">{{floorData}}</th>
+                    <th>{{floorList.manpower}}</th>
+                    <th>{{floorList.operator}}</th>
+                    <th>{{floorList.helper}}</th>
+                    <th></th>
+                    <th>{{floorList.workHour}}</th>
+                    <th>{{floorList.dayTarget}}</th>
+                    <th>{{floorList.hourTarget}}</th>
+                    <th>{{floorList.dayAchievement}}</th>
+                    <th></th>
+                    <th></th>
+                    <th>{{floorList.vari}}</th>
+                    <th>{{floorList.LineWIP}}</th>
+                    <th>{{floorList.H_8_9}}</th>
+                    <th>{{floorList.H_9_10}}</th>
+                    <th>{{floorList.H_10_11}}</th>
+                    <th>{{floorList.H_11_12}}</th>
+                    <th>{{floorList.H_12_13}}</th>
+                    <th>{{floorList.H_14_15}}</th>
+                    <th>{{floorList.H_15_16}}</th>
+                    <th>{{floorList.H_16_17}}</th>
+                    <th>{{floorList.H_17_18}}</th>
+                    <th>{{floorList.H_18_19}}</th>
+                    <th>{{floorList.H_19_20}}</th>
+                    <th>{{floorList.H_20_21}}</th>
+                    <th>{{floorList.H_21_22}}</th>
+                </tr>
             {% endfor %}
+            <tr>
+                <tr>
+                    <th></th>
+                    <th colspan="3">Total</th>
+                    <th>{{unitProduction.manpower}}</th>
+                    <th>{{unitProduction.operator}}</th>
+                    <th>{{unitProduction.helper}}</th>
+                    <th></th>
+                    <th>{{unitProduction.workHour}}</th>
+                    <th>{{unitProduction.dayTarget}}</th>
+                    <th>{{unitProduction.hourTarget}}</th>
+                    <th>{{unitProduction.dayAchievement}}</th>
+                    <th></th>
+                    <th></th>
+                    <th>{{unitProduction.vari}}</th>
+                    <th>{{unitProduction.LineWIP}}</th>
+                    <th>{{unitProduction.H_8_9}}</th>
+                    <th>{{unitProduction.H_9_10}}</th>
+                    <th>{{unitProduction.H_10_11}}</th>
+                    <th>{{unitProduction.H_11_12}}</th>
+                    <th>{{unitProduction.H_12_13}}</th>
+                    <th>{{unitProduction.H_14_15}}</th>
+                    <th>{{unitProduction.H_15_16}}</th>
+                    <th>{{unitProduction.H_16_17}}</th>
+                    <th>{{unitProduction.H_17_18}}</th>
+                    <th>{{unitProduction.H_18_19}}</th>
+                    <th>{{unitProduction.H_19_20}}</th>
+                    <th>{{unitProduction.H_20_21}}</th>
+                    <th>{{unitProduction.H_21_22}}</th>
+                </tr>
+
+            </tr>
         </table>
     </div>
 </div>

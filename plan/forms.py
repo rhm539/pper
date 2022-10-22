@@ -11,16 +11,16 @@ class PlanForm(forms.ModelForm):
 
     class Meta:
         model = plan
-        fields = ['buyer', 'style', 'deleveryDate', 'inputDate',
+        fields = ['buyer', 'style', 'deleveryDate', 'sewingStartDate',
                   'sewingEndDate', 'orderQty', 'planQtyExtra']
         widgets = {
             'deleveryDate': forms.DateInput({'type': 'date'}),
-            'inputDate': forms.DateInput({'type': 'date'}),
+            'sewingStartDate': forms.DateInput({'type': 'date'}),
             'sewingEndDate': forms.DateInput({'type': 'date'}),
         }
         labels = {
             'deleveryDate': 'Delevery Date',
-            'inputDate': 'Input Date',
+            'sewingStartDate': 'Sewing Start Date',
             'sewingEndDate': 'Sewing End Date',
             'orderQty': 'Order Qty.',
             'planQtyExtra': 'Plan Qty. Extra',

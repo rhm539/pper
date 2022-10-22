@@ -31,14 +31,15 @@ class plan(models.Model):
     style = models.ForeignKey(style, models.CASCADE, null=True)
     line = models.ForeignKey(line, models.CASCADE, null=True)
     deleveryDate = models.DateField()
-    inputDate = models.DateField()
+    sewingStartDate = models.DateField()
     sewingEndDate = models.DateField()
     orderQty = models.IntegerField()
     planQtyExtra = models.PositiveSmallIntegerField(default=3)
+    totalOrder = models.IntegerField()
     linePlanQty = models.PositiveSmallIntegerField(default=0)
     estimateWorkDay = models.PositiveSmallIntegerField(default=0)
     #
-    DataLock = models.CharField(
+    dataLock = models.CharField(
         max_length=2, default='N', choices=datastatus, null=True)
     staff = models.ForeignKey(User, models.CASCADE, null=True)
     created_at = models.DateField(default=timezone.now)

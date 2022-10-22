@@ -1,3 +1,4 @@
+
 from django.contrib.auth.decorators import login_required
 from datetime import date, datetime, timedelta
 from django.shortcuts import render
@@ -47,21 +48,21 @@ def percentageToAmount(amount, percentage):
 # date check of plan from
 
 
-def planDate(deleveryDate, inputDate, sewingEndDate):
+def planDate(deleveryDate, sewingStartDate, sewingEndDate):
     toDay = date.today()
     datePass = False
     nextDay = toDay + timedelta(days=180)
     peviousDay = toDay - timedelta(days=14)
-    if inputDate < nextDay and inputDate > peviousDay:
+    if sewingStartDate < nextDay and sewingStartDate > peviousDay:
         datePass = True
     else:
         datePass = False
-    if sewingEndDate < nextDay and sewingEndDate > peviousDay and sewingEndDate >= inputDate:
+    if sewingEndDate < nextDay and sewingEndDate > peviousDay and sewingEndDate >= sewingStartDate:
         datePass = True
     else:
         datePass = False
     if deleveryDate < nextDay and deleveryDate > peviousDay:
-        if deleveryDate >= inputDate and deleveryDate >= sewingEndDate:
+        if deleveryDate >= sewingStartDate and deleveryDate >= sewingEndDate:
             datePass = True
         else:
             datePass = False
@@ -72,8 +73,8 @@ def planDate(deleveryDate, inputDate, sewingEndDate):
 # finout amoun of day
 
 
-def planBook(inputDate, sewingEndDate):
-    planForDay = sewingEndDate - inputDate
+def planBook(sewingStartDate, sewingEndDate):
+    planForDay = sewingEndDate - sewingStartDate
     planForDay = (planForDay.days)+1
     return planForDay
 
@@ -97,14 +98,14 @@ def planEntry(request, pk):
         if form.is_valid():
             planData = form.save(commit=False)
             datePass = planDate(planData.deleveryDate,
-                                planData.inputDate, planData.sewingEndDate)
+                                planData.sewingStartDate, planData.sewingEndDate)
             if planData.orderQty > 0 and datePass is True:
-                planForDay = planBook(planData.inputDate,
+                planForDay = planBook(planData.sewingStartDate,
                                       planData.sewingEndDate)
-                sewingDate = planData.inputDate
+                sewingDate = planData.sewingStartDate
                 planData.unit = lineData.unit
                 planData.line = lineData
-                planData.planQtyExtra = percentageToAmount(
+                planData.totalOrder = percentageToAmount(
                     planData.orderQty, planData.planQtyExtra)
                 planData.staff = request.user
                 planData.save()
@@ -137,11 +138,13 @@ def planEntry(request, pk):
     context = {
         'form': form,
         'pk': pk,
+        'lineName': lineData.name,
     }
     return render(request, 'plan/planEntry.html', context)
 
 
 def planEdit(request, pk):
+    #lineData = line.objects.get(pk=pk)
     planData = plan.objects.get(id=pk)
     productionData = production.objects.filter(plan=pk, dataLock='N')
     if request.method == 'POST':
@@ -149,9 +152,9 @@ def planEdit(request, pk):
         if form.is_valid():
             planData = form.save(commit=False)
             datePass = planDate(planData.deleveryDate,
-                                planData.inputDate, planData.sewingEndDate)
+                                planData.sewingStartDate, planData.sewingEndDate)
             if planData.orderQty > 0 and planData.planQtyExtra < 10 and datePass is True:
-                planData.planQtyExtra = percentageToAmount(
+                planData.totalOrder = percentageToAmount(
                     planData.orderQty, planData.planQtyExtra)
                 planData.buyer = planData.style.buyer
                 planData.staff = request.user
@@ -171,6 +174,7 @@ def planEdit(request, pk):
     context = {
         'form': form,
         'pk': pk,
+        'lineName': planData.line.name,
     }
     return render(request, 'plan/planEdit.html', context)
 
@@ -187,7 +191,7 @@ def plan_Entry_show(request, pk):
 
 
 def linePlan_show(request, pk):
-    planSummary = plan.objects.all().filter(line=pk).order_by('inputDate')
+    planSummary = plan.objects.all().filter(line=pk).order_by('sewingStartDate')
     context = {
         'planSummary': planSummary,
         # 'planDetail': planDetail,
@@ -197,7 +201,7 @@ def linePlan_show(request, pk):
 
 def forcast_table(request):
     pk = request.user.profile.unit
-    planSummary = plan.objects.all().filter(unit=pk).order_by('inputDate')
+    planSummary = plan.objects.all().filter(unit=pk).order_by('sewingStartDate')
     context = {
         'planSummary': planSummary,
         # 'planDetail': planDetail,
@@ -206,18 +210,22 @@ def forcast_table(request):
 
 
 '''
+
+
 def Plan_layout(request):
 
     context = {
 
     }
     return render(request, 'plan/plan_layout.html', context)
+
+
 '''
 
 
 def Plan_layout_day(unit, dateData):
     productionData = production.objects.filter(
-        sewingDate=dateData, unit=unit).order_by('line')
+        sewingDate=dateData, unit__id=unit).order_by('line')
     return productionData
 
 
@@ -242,7 +250,7 @@ def Plan_layout(request):
     mydate = date.today()
     lastDay, curentDay, nextDay = findOutDate(mydate)
     goToPage = 'Plan-Layout-nav'
-    productionData = Plan_layout_day(unit, mydate)
+    productionData = Plan_layout_day(unit.id, mydate)
     context = {
         'production': productionData,
         'lastDay': lastDay,
@@ -297,7 +305,10 @@ def add_plan(request, mydate):
         if formset.is_valid():
             addPlanData = formset.save(commit=False)
             for addPlan in addPlanData:
+                planData = plan.objects.get(pk=addPlan.plan.id)
                 if addPlan.workHour > 0:
+                    addPlan.line = planData.line
+                    addPlan.style = planData.style
                     addPlan.manpower = addPlan.operator+addPlan.helper
                     addPlan.hourTarget = round(
                         addPlan.dayTarget / addPlan.workHour)
