@@ -1,0 +1,206 @@
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+html,
+body {
+    line-height: 1.4;
+    font-weight: 300;
+    font-family: "Roboto", sans-serif;
+    text-transform: capitalize;
+    font-size: 14px;
+    background-color:#FDF7ED;
+    
+}
+
+    .container{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    /*----Table--------------------------*/
+
+    .table,
+    .table_head{
+        margin-top: 25px;
+        text-align: center;
+        width: 100%;
+    }
+    .table,
+    .table th,
+    .table td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        height: 30px;
+        padding:1px
+    }
+    .unitName{
+        font-size: 24px;
+    }
+    .floor td{
+        background-color:#cfbaf0;
+    }
+</style>
+    <div class="container">
+        <table class="table_head" >
+                <tr>
+                    <th class="unitName">{{unitData.name}}</th>
+                </tr>
+                <tr>
+                    <th>Daily Production Report</th>
+                </tr>
+                <tr>
+                    <th>{{mydate}}</th>
+                </tr>
+        </table>
+        <table class="table" >
+            <tr style="background-color:#c2c5aa;">
+                <th style="width:100px">Line</th>
+                <th>Buyer</th>
+                <th>Style</th>
+                <th>SMV</th>
+                <th>MO</th>
+                <th>HP</th>
+                <th>MP</th>
+                <th>Run Day</th>
+                <th>Work Hour</th>
+                <th>day Target</th>
+                <th>Hour Target</th>
+                <th>Day Achiev.</th>
+                <th>Target Effi</th>
+                <th>achiev. Effi</th>
+                <th>VARI</th>
+                <th>Line WIP</th>
+                <th>9 AM</th>
+                <th>10 AM</th>
+                <th>11 AM</th>
+                <th>12 PM</th>
+                <th>01 PM</th>
+                {% if unitProduction.H_14_15 > 0 %}
+                <th>03 PM</th>
+                <th>04 PM</th>
+                <th>05 PM</th>
+                <th>06 PM</th>
+                <th>07 PM</th>
+                <th>08 PM</th>
+                {% endif %}
+                {% if unitProduction.H_20_21 > 0 %}
+                <th>09 PM</th>
+                <th>10 PM</th>
+                {% endif %}
+            </tr>
+                {% for floorList, floorData,Average_SMV,targetEfficiency,achievementEfficiency in list %}
+                    {% for productions in production %}
+                        {% if productions.plan.line.floor == floorData %}
+            <tr>
+                        <td>{{productions.plan.line}}</td>
+                        <td>{{productions.plan.buyer}}</td>
+                        <td>{{productions.plan.style}}</td>
+                        <td>{{productions.plan.style.smv|floatformat:2}}</td>
+                        <td>{{productions.operator}}</td>
+                        <td>{{productions.helper}}</td>
+                        <td>{{productions.manpower}}</td>
+                        <td>{{productions.runDay|floatformat:1}}</td>
+                        <td>{{productions.workHour}}</td>
+                        <td>{{productions.dayTarget}}</td>
+                        <td>{{productions.hourTarget}}</td>
+                        <td>{{productions.dayAchievement}}</td>
+                        <td>{{productions.targetEfficiency|floatformat:2 }}</td>
+                        <td>{{productions.achievementEfficiency}}</td>
+                        <td>{{productions.vari}}</td>
+                        <td>{{productions.LineWIP}}</td>
+                        <td>{{productions.H_8_9}}</td>
+                        <td>{{productions.H_9_10}}</td>
+                        <td>{{productions.H_10_11}}</td>
+                        <td>{{productions.H_11_12}}</td>
+                        <td>{{productions.H_12_13}}</td>
+                        {% if productions.H_14_15 > 0 %}
+                        <td>{{productions.H_14_15}}</td>
+                        <td>{{productions.H_15_16}}</td>
+                        <td>{{productions.H_16_17}}</td>
+                        <td>{{productions.H_17_18}}</td>
+                        <td>{{productions.H_18_19}}</td>
+                        <td>{{productions.H_19_20}}</td>
+                        {% endif %}
+                        {% if productions.H_20_21 > 0 %}
+                        <td>{{productions.H_20_21}}</td>
+                        <td>{{productions.H_21_22}}</td>
+                        {% endif %}
+            </tr>
+                        {% endif %}
+                    {% endfor %}
+            <tr style="background-color:#d8f3dc;">
+                        <th></th>
+                        <th colspan="2">{{floorData}}</th>
+                        <th>{{Average_SMV|floatformat:2 }}</th>
+                        <th>{{floorList.manpower}}</th>
+                        <th>{{floorList.operator}}</th>
+                        <th>{{floorList.helper}}</th>
+                        <th></th>
+                        <th>{{floorList.workHour}}</th>
+                        <th>{{floorList.dayTarget}}</th>
+                        <th>{{floorList.hourTarget}}</th>
+                        <th>{{floorList.dayAchievement}}</th>
+                        <th>{{targetEfficiency|floatformat:2 }}</th>
+                        <th>{{achievementEfficiency|floatformat:2 }}</th>
+                        <th>{{floorList.vari}}</th>
+                        <th>{{floorList.LineWIP}}</th>
+                        <th>{{floorList.H_8_9}}</th>
+                        <th>{{floorList.H_9_10}}</th>
+                        <th>{{floorList.H_10_11}}</th>
+                        <th>{{floorList.H_11_12}}</th>
+                        <th>{{floorList.H_12_13}}</th>
+                        {% if floorList.H_14_15 > 0 %}
+                        <th>{{floorList.H_14_15}}</th>
+                        <th>{{floorList.H_15_16}}</th>
+                        <th>{{floorList.H_16_17}}</th>
+                        <th>{{floorList.H_17_18}}</th>
+                        <th>{{floorList.H_18_19}}</th>
+                        <th>{{floorList.H_19_20}}</th>
+                        {% endif %}
+                        {% if productions.H_20_21 > 0 %}
+                        <th>{{floorList.H_20_21}}</th>
+                        <th>{{floorList.H_21_22}}</th>
+                        {% endif %}
+            </tr>
+                {% endfor %}
+            <tr style="background-color:#c2c5aa;">
+                        <th></th>
+                        <th colspan="2">Total</th>
+                        <th>{{unitSmv|floatformat:2 }}</th>
+                        <th>{{unitProduction.manpower}}</th>
+                        <th>{{unitProduction.operator}}</th>
+                        <th>{{unitProduction.helper}}</th>
+                        <th></th>
+                        <th>{{unitProduction.workHour}}</th>
+                        <th>{{unitProduction.dayTarget}}</th>
+                        <th>{{unitProduction.hourTarget}}</th>
+                        <th>{{unitProduction.dayAchievement}}</th>
+                        <th>{{unit_targetEfficiency|floatformat:2 }}</th>
+                        <th>{{unit_achievementEfficiency|floatformat:2 }}</th>
+                        <th>{{unitProduction.vari}}</th>
+                        <th>{{unitProduction.LineWIP}}</th>
+                        <th>{{unitProduction.H_8_9}}</th>
+                        <th>{{unitProduction.H_9_10}}</th>
+                        <th>{{unitProduction.H_10_11}}</th>
+                        <th>{{unitProduction.H_11_12}}</th>
+                        <th>{{unitProduction.H_12_13}}</th>
+                        {% if unitProduction.H_14_15 > 0 %}
+                        <th>{{unitProduction.H_14_15}}</th>
+                        <th>{{unitProduction.H_15_16}}</th>
+                        <th>{{unitProduction.H_16_17}}</th>
+                        <th>{{unitProduction.H_17_18}}</th>
+                        <th>{{unitProduction.H_18_19}}</th>
+                        <th>{{unitProduction.H_19_20}}</th>
+                        {% endif %}
+                        {% if unitProduction.H_20_21 > 0 %}    
+                        <th>{{unitProduction.H_20_21}}</th>
+                        <th>{{unitProduction.H_21_22}}</th>
+                        {% endif %}
+            </tr>
+        </table>
+        Fashion Step Group &copy IT Team
+    </div>
