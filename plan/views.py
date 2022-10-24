@@ -181,7 +181,11 @@ def planEdit(request, pk):
     context = {
         'form': form,
         'pk': pk,
+<<<<<<< HEAD
         'lineName': planData.line.name,
+=======
+
+>>>>>>> a0e64ace5c01fb93e1a00661ae433a3e39cd7406
     }
     return render(request, 'plan/planEdit.html', context)
 
@@ -315,7 +319,11 @@ def add_plan(request, mydate):
             addPlanData = formset.save(commit=False)
             for addPlan in addPlanData:
                 planData = plan.objects.get(pk=addPlan.plan.id)
+<<<<<<< HEAD
                 if addPlan.workHour > 0 and addPlan.dayTarget > 0 and addPlan.style.smv > 0:
+=======
+                if addPlan.workHour > 0:
+>>>>>>> a0e64ace5c01fb93e1a00661ae433a3e39cd7406
                     addPlan.line = planData.line
                     addPlan.style = planData.style
                     addPlan.manpower = addPlan.operator+addPlan.helper
