@@ -5,18 +5,14 @@ from datetime import date, datetime
 from django.shortcuts import redirect, render
 from plan.forms import planAddForms
 from plan.models import plan
-from plan.views import Plan_layout_day, findOutDate, unitKnow
+from plan.views import EfficiencyCaculator, Plan_layout_day, findOutDate, unitKnow
 from production.forms import productionHourForm
 from django.contrib import messages
 from production.models import production
+#
 
 
 # Create your views here.
-
-# ((Output*SMV)/(Manpower*(Working*60)))*100
-def EfficiencyCaculator(Output, SMV, Manpower, Working):
-    Efficiency = ((Output*SMV)/(Manpower*(Working*60))) * 100
-    return Efficiency
 
 
 def line_layout_nev(request, mydate):
@@ -42,6 +38,7 @@ def line_layout(request):
     goToPage = 'line-Layout-nav'
     productionData = Plan_layout_day(unit.id, mydate)
     context = {
+        'unit': unit,
         'production': productionData,
         'lastDay': lastDay,
         'curentDay': curentDay,
@@ -103,10 +100,7 @@ def hourly_report_entry(Data):
         Data.vari = Data.dayTarget - dayAchievement
     else:
         Data.vari = 0
-    if Data.dayTarget > 0 and Data.style.smv > 0 and Data.manpower > 0 and Data.workHour > 0:
-        Data.targetEfficiency = EfficiencyCaculator(
-            Data.dayTarget, Data.style.smv, Data.manpower, Data.workHour)
-
+    if Data.dayAchievement > 0 and Data.style.smv > 0 and Data.manpower > 0 and Data.workHour > 0:
         Data.achievementEfficiency = EfficiencyCaculator(
             Data.dayAchievement, Data.style.smv, Data.manpower, Data.workHour)
 
