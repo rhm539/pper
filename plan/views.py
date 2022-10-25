@@ -174,11 +174,7 @@ def planEdit(request, pk):
     context = {
         'form': form,
         'pk': pk,
-        << << << < HEAD
         'lineName': planData.line.name,
-        == == == =
-
-        >>>>>> > a0e64ace5c01fb93e1a00661ae433a3e39cd7406
     }
     return render(request, 'plan/planEdit.html', context)
 

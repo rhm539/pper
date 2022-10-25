@@ -50,11 +50,13 @@ def line_layout(request):
 
 
 def hourly_report_entry(Data):
-<<<<<<< HEAD
-=======
 
->>>>>>> a0e64ace5c01fb93e1a00661ae433a3e39cd7406
-    if Data.H_8_9 is None:
+
+<< << << < HEAD
+== == == =
+
+>>>>>> > a0e64ace5c01fb93e1a00661ae433a3e39cd7406
+   if Data.H_8_9 is None:
         Data.H_8_9 = 0
 
     if Data.H_9_10 is None:
@@ -95,10 +97,6 @@ def hourly_report_entry(Data):
 
     if Data.LineWIP is None:
         Data.LineWIP = 0
-<<<<<<< HEAD
-=======
-
->>>>>>> a0e64ace5c01fb93e1a00661ae433a3e39cd7406
     dayAchievement = Data.H_8_9+Data.H_9_10+Data.H_10_11+Data.H_11_12+Data.H_12_13+Data.H_14_15 + \
         Data.H_15_16+Data.H_16_17+Data.H_17_18+Data.H_18_19 + \
         Data.H_19_20+Data.H_20_21+Data.H_21_22
@@ -161,16 +159,16 @@ def hourly_report_entry_detail(request, pk):
 
 def line_delete(request, pk):
     productionData = production.objects.get(pk=pk)
-<<<<<<< HEAD
-    plans = plan.objects.get(pk=productionData.plan.id)
+<<<<<< < HEAD
+   plans = plan.objects.get(pk=productionData.plan.id)
     pk = plans.id
     lineCount = production.objects.filter(plan=pk).count()
-=======
-    plan = production.objects.filter(plan=productionData.plan)
+== =====
+   plan = production.objects.filter(plan=productionData.plan)
     pk = productionData.plan
     lineCount = plan.count()
->>>>>>> a0e64ace5c01fb93e1a00661ae433a3e39cd7406
-    if productionData.dayAchievement == 0:
+>>>>>> > a0e64ace5c01fb93e1a00661ae433a3e39cd7406
+   if productionData.dayAchievement == 0:
         if lineCount > 1:
             productionData.delete()
             messages.warning(
