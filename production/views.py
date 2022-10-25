@@ -50,13 +50,7 @@ def line_layout(request):
 
 
 def hourly_report_entry(Data):
-
-
-<< << << < HEAD
-== == == =
-
->>>>>> > a0e64ace5c01fb93e1a00661ae433a3e39cd7406
-   if Data.H_8_9 is None:
+    if Data.H_8_9 is None:
         Data.H_8_9 = 0
 
     if Data.H_9_10 is None:
@@ -159,16 +153,9 @@ def hourly_report_entry_detail(request, pk):
 
 def line_delete(request, pk):
     productionData = production.objects.get(pk=pk)
-<<<<<< < HEAD
-   plans = plan.objects.get(pk=productionData.plan.id)
-    pk = plans.id
+    plans = plan.objects.get(pk=productionData.plan.id)
     lineCount = production.objects.filter(plan=pk).count()
-== =====
-   plan = production.objects.filter(plan=productionData.plan)
-    pk = productionData.plan
-    lineCount = plan.count()
->>>>>> > a0e64ace5c01fb93e1a00661ae433a3e39cd7406
-   if productionData.dayAchievement == 0:
+    if productionData.dayAchievement == 0:
         if lineCount > 1:
             productionData.delete()
             messages.warning(
@@ -214,7 +201,6 @@ def line_add(request, pk):
         productionData.style = planData.style
         productionData.line = planData.line
         productionData.floor = planData.line.floor
-
         planData.sewingEndDate = nextDay
         planData.save()
         productionData.save()
@@ -228,7 +214,6 @@ def line_add(request, pk):
         productionData.style = planData.style
         productionData.line = planData.line
         productionData.floor = planData.line.floor
-
         planData.sewingEndDate = nextDay
         planData.save()
         productionData.save()

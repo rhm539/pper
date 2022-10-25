@@ -9,10 +9,17 @@ from plan.models import plan
 from production.models import production
 from django.forms import modelformset_factory
 
+
 from setup.models import style, line
 # Create your views here.
 
-#
+# ((Output*SMV)/(Manpower*(Working*60)))*100
+
+
+def EfficiencyCaculator(Output, SMV, Manpower, WorkingHour):
+    if float(SMV) > 0 and Manpower > 0 and WorkingHour > 0 and Output > 0:
+        Efficiency = ((Output*SMV)/(Manpower*(WorkingHour*60))) * 100
+    return Efficiency
 
 
 class DateConverter:
@@ -144,7 +151,7 @@ def planEntry(request, pk):
 
 
 def planEdit(request, pk):
-    #lineData = line.objects.get(pk=pk)
+    # lineData = line.objects.get(pk=pk)
     planData = plan.objects.get(id=pk)
     productionData = production.objects.filter(plan=pk, dataLock='N')
     if request.method == 'POST':
@@ -175,6 +182,7 @@ def planEdit(request, pk):
         'form': form,
         'pk': pk,
         'lineName': planData.line.name,
+
     }
     return render(request, 'plan/planEdit.html', context)
 
@@ -232,7 +240,7 @@ def Plan_layout_day(unit, dateData):
 def Plan_layout_nav(request, mydate):
     unit = unitKnow(request)
     lastDay, curentDay, nextDay = findOutDate(mydate)
-    productionData = Plan_layout_day(unit, mydate)
+    productionData = Plan_layout_day(unit.id, mydate)
     goToPage = 'Plan-Layout-nav'
     context = {
         'production': productionData,
@@ -298,7 +306,9 @@ def plan_line_move(request, pk):
 
 
 def add_plan(request, mydate):
-    productionData = production.objects.filter(sewingDate=mydate, dataLock='N')
+    unit = unitKnow(request)
+    productionData = production.objects.filter(
+        sewingDate=mydate, dataLock='N', unit=unit).order_by('line')
     planFormSet = modelformset_factory(production, planAddForms, extra=0)
     if request.method == 'POST':
         formset = planFormSet(request.POST)
@@ -306,13 +316,17 @@ def add_plan(request, mydate):
             addPlanData = formset.save(commit=False)
             for addPlan in addPlanData:
                 planData = plan.objects.get(pk=addPlan.plan.id)
-                if addPlan.workHour > 0:
+                if addPlan.workHour > 0 and addPlan.dayTarget > 0 and addPlan.style.smv > 0:
                     addPlan.line = planData.line
                     addPlan.style = planData.style
                     addPlan.manpower = addPlan.operator+addPlan.helper
                     addPlan.hourTarget = round(
                         addPlan.dayTarget / addPlan.workHour)
+                    if addPlan.manpower > 0 and addPlan.style.smv > 0:
+                        addPlan.targetEfficiency = EfficiencyCaculator(addPlan.dayTarget, float(
+                            addPlan.style.smv), addPlan.manpower, addPlan.workHour)
                     addPlan.save()
+                # return redirect('add-plan', mydate)
             return redirect('Plan-Layout-nav', mydate)
     else:
         formset = planFormSet(queryset=productionData)
